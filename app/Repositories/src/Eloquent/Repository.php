@@ -110,6 +110,18 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
+     * Populate for input type select
+     *
+     * @param $name
+     * @param $value
+     * @return array
+     */
+    public function getForSelect($name,$value)
+    {
+        return $this->model->pluck($name,$value)->toArray();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Builder
      * @throws RepositoryException
      */

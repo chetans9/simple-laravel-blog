@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Repositories\Contracts\RepositoryInterface;
 use App\Repositories\Eloquent\Repository;
 
-class CategoriesRepository extends Repository
+class PostCategoriesRepository extends Repository
 {
 
     /**
@@ -15,6 +15,6 @@ class CategoriesRepository extends Repository
      */
     function model()
     {
-        return 'App\Models\CategoriesModel';
+        return 'App\Models\PostCategoriesModel';
     }
 }

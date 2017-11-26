@@ -18,5 +18,15 @@ class PostsModel extends Model
      *
      * @var array
      */
-    protected $fillable = ['title','slug','summary','content','active','user_id'];
+    protected $fillable = ['title','category_id','slug','summary','content','active','user_id'];
+
+    /**
+     * Belongs to one relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo('App/Models/CategoriesModel','category_id');
+    }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Back\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
-use App\Repositories\CategoriesRepository;
+use App\Repositories\PostCategoriesRepository;
 
 class AdminPostsCategoriesController extends Controller
 {
@@ -14,10 +14,10 @@ class AdminPostsCategoriesController extends Controller
 
     protected $users;
 
-    public function __construct(UserRepository $users,CategoriesRepository $categories)
+    public function __construct(UserRepository $users,PostCategoriesRepository $categories)
     {
         $this->middleware('auth');
-        $this->categories = $categories;
+        $this->PostCategoriesRepository = $categories;
         $this->users = $users;
 
     }
@@ -29,7 +29,7 @@ class AdminPostsCategoriesController extends Controller
     public function index()
     {
 
-        $list = $this->categories->paginate(50);
+        $list = $this->PostCategoriesRepository->paginate(50);
 
 
         return view('back.categories.list',compact('list'));
@@ -59,7 +59,7 @@ class AdminPostsCategoriesController extends Controller
             'active' => 'required',
         ]);
         $inputs = $request->all();
-        $status = $this->categories->create($inputs);
+        $status = $this->PostCategoriesRepository->create($inputs);
         ($status)? $request->session()->flash('success', 'New Category created Successfully!'): $request->session()->flash('fail', 'Failed!');
 
         return redirect("admin/posts-categories");
