@@ -372,9 +372,15 @@ ul.navig li a.active{
 .about-two ul li a span.drbl{
 	background-position:-64px 0px;
 }
-.about-tre{
+/*.about-tre{
 	margin-top:5%;
+}*/
+
+.recent-posts{
+	margin-top:5%;
+
 }
+
 .abt-left img{
 	width:100%;
 	border-radius: 5px;

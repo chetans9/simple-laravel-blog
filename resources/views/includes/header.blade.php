@@ -2,7 +2,7 @@
     <div class="header-top">
         <div class="container">
             <div class="head-main">
-                <a href="index.html"><img src="images/logo-1.png" alt="" /></a>
+                <a href="index.html"><img src="{{url('images/logo-1.png')}}" alt="" /></a>
             </div>
         </div>
     </div>
@@ -14,11 +14,11 @@
                 <div class="navigation">
                     <span class="menu"></span>
                     <ul class="navig">
-                        <li><a href="{{url('/')}}" class="active">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="{{url('/')}}" @if(Request::segment('1') == '') class="active" @endif>Home</a></li>
+                        <li><a href="{{url('/about')}}" @if(Request::segment('1') == 'about') class="active" @endif>About</a></li>
+                        <li><a href="{{url('/gallery')}}" @if(Request::segment('1') == 'gallery') class="active" @endif>Gallery</a></li>
                         <li><a href="typo.html">Typo</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.html" @if(Request::segment('1') == 'contact') class="active" @endif>Contact</a></li>
                     </ul>
                 </div>
                 <div class="header-right">

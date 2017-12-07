@@ -16,6 +16,6 @@
     <!--global-Js-->
     @include('includes.scripts')
     
-    @yield('scripts')
+    @yield('page_scripts')
 </body>
 </html>

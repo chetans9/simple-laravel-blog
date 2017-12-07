@@ -83,54 +83,50 @@
                         </li>
                     </ul>
                 </div>
-                <div class="about-tre">
+
+               {{--  Recent Posts Section --}}
+                <div class="recent-posts">
                     <div class="a-1">
+                        @php
+                         $recent_posts_count = 0;    
+                        @endphp
+                        @foreach($recent_posts as $recent_post)
+                        
                         <div class="col-md-6 abt-left">
-                            <a href="single.html">
+                            <a href="{{url('/blog/post/'.$recent_post->id)}}">
                                 <img alt="" src="images/c-3.jpg"/>
                             </a>
-                            <h6>
+                            {{-- <h6>
                                 Find The Most
-                            </h6>
+                            </h6> --}}
                             <h3>
-                                <a href="single.html">
-                                    Tasty Coffee
+                                <a href="{{url('/blog/post/'.$recent_post->id)}}">
+                                    {{$recent_post->title}}
                                 </a>
                             </h3>
-                            <p>
-                                Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed
-                                    massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed
-                                    diam.
-                            </p>
+                            <div>
+                                {!!$recent_post->content!!}
+                           
+                            </div>
                             <label>
-                                May 29, 2015
+                               {{$recent_post->created_at->diffForHumans()}}
                             </label>
                         </div>
-                        <div class="col-md-6 abt-left">
-                            <a href="single.html">
-                                <img alt="" src="images/c-4.jpg"/>
-                            </a>
-                            <h6>
-                                Find The Most
-                            </h6>
-                            <h3>
-                                <a href="single.html">
-                                    Tasty Coffee
-                                </a>
-                            </h3>
-                            <p>
-                                Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed
-                                    massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed
-                                    diam.
-                            </p>
-                            <label>
-                                May 29, 2015
-                            </label>
-                        </div>
-                        <div class="clearfix">
-                        </div>
+
+                        @php
+                         $recent_posts_count++;    
+                        @endphp
+
+                        @if($recent_posts_count%2 == 0)
+                            <div class="clearfix"></div>
+                        @endif
+                        
+                         @endforeach
+                         
                     </div>
-                    <div class="a-1">
+
+                   
+                    {{-- <div class="a-1">
                         <div class="col-md-6 abt-left">
                             <a href="single.html">
                                 <img alt="" src="images/c-5.jpg"/>
@@ -175,8 +171,8 @@
                         </div>
                         <div class="clearfix">
                         </div>
-                    </div>
-                    <div class="a-1">
+                    </div> --}}
+                    {{-- <div class="a-1">
                         <div class="col-md-6 abt-left">
                             <a href="single.html">
                                 <img alt="" src="images/c-7.jpg"/>
@@ -221,7 +217,7 @@
                         </div>
                         <div class="clearfix">
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-md-4 about-right heading">

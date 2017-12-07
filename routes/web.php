@@ -20,14 +20,23 @@ Route::get('/', 'Home\HomeController@index');
 Route::get("/admin","Auth\LoginController@showLoginForm")->name('login');
 Route::post("/login","Auth\LoginController@login");
 
+Route::get("/blog/post/{id}","Blog\PostsController@show");
+
+
+//------------------------------About Us---------------------------------------//
+Route::get("about","About\AboutUsController@index");
+
+Route::get("gallery","Gallery\GalleryController@index");
+
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/dashboard', 'Back\Dashboard\AdminDashboardController@index');
-    Route::resource('posts', 'Back\Posts\AdminPostsController');
-    Route::resource('posts-categories','Back\Posts\AdminPostsCategoriesController');
+    Route::get('/dashboard', 'Admin\Dashboard\AdminDashboardController@index');
+    Route::resource('posts', 'Admin\Posts\AdminPostsController');
+    Route::resource('posts-categories','Admin\Posts\AdminPostsCategoriesController');
 
 });
+
 
 
 
