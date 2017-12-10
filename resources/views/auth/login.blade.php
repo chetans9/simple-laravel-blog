@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    @include('back.includes.head')
+    @include('includes.admin.head')
 </head>
 
 <body>

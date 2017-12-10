@@ -17,4 +17,18 @@ class PostsRepository extends Repository
     {
         return 'App\Models\PostsModel';
     }
+
+
+    /**
+     * 
+     */
+    public function getRecentPosts()
+    {
+    	return $this->model->OrderBy('created_at','Desc')->limit(6)->get();
+    }
+
+     public function getFeaturedPosts()
+    {
+    	return $this->model->where('featured_post','1')->get();
+    }
 }

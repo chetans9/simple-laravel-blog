@@ -72,10 +72,8 @@ class AdminPostsController extends Controller
 
         if($inputs['featured_image'])
         {
-            $featured_image = $inputs['featured_image'];
-            $featured_image->move(public_path("/uploads/images/blog/"),$featured_image->getClientOriginalName());
-
-            $inputs['featured_image'] = "/uploads/images/blog/".$featured_image->getClientOriginalName();
+            $image_path = uploadWithThumb($inputs['featured_image'],'images/blog');
+            $inputs['featured_image'] = $image_path;   
         }
 
 
@@ -124,6 +122,11 @@ class AdminPostsController extends Controller
               
         $inputs['user_id'] = Auth::user()->id;
         $inputs['slug'] = str_slug($inputs['title'], '-');
+        if($inputs['featured_image'])
+        {
+            $image_path = uploadWithThumb($inputs['featured_image'],'images/blog');
+            $inputs['featured_image'] = $image_path;   
+        }
         $this->postsRepository->update($inputs,$id);
         \Session::flash('success','Post Updated Successfully');
         return redirect(url('admin/posts'));

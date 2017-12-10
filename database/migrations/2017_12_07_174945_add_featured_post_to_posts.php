@@ -14,7 +14,7 @@ class AddFeaturedPostToPosts extends Migration
     public function up()
     {
         Schema::table('posts', function(Blueprint $table) {
-            $table->Integer('featured_post')->after('user_id'); 
+            $table->tinyInteger('featured_post')->after('user_id')->default(0); 
         });
     }
 

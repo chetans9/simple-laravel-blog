@@ -55,6 +55,21 @@
     @endif
 </div>
 
+<div class="form-group{{ $errors->has('featured_post') ? ' has-error' : '' }}">
+    <label>Featured : </label>
+    <label class="radio-inline">
+        {{Form::radio('featured_post','1',null,['id'=>'yes'])}} Yes
+    </label>
+    <label class="radio-inline">
+        {{Form::radio('featured_post','0',true,['id'=>'yes'])}} No
+    </label>
+    @if ($errors->has('featured_post'))
+        <span class="help-block">
+                <strong>{{ $errors->first('featured_post') }}</strong>
+        </span>
+    @endif
+</div>
+
 
 @section('page_scripts')
 

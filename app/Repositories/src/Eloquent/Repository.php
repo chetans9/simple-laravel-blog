@@ -1,5 +1,7 @@
-<?php namespace App\Repositories\Eloquent;
+<?php 
+namespace App\Repositories\Eloquent;
 
+use Illuminate\Support\Collection;
 use App\Repositories\Contracts\RepositoryInterface;
 use App\Repositories\Exceptions\RepositoryException;
 
@@ -10,7 +12,7 @@ use Illuminate\Container\Container as App;
  * Class Repository
  * @package App\Repositories\Eloquent
  */
-abstract class Repository implements RepositoryInterface
+abstract class Repository implements RepositoryInterface 
 {
 
     /**
@@ -134,4 +136,5 @@ abstract class Repository implements RepositoryInterface
 
         return $this->model = $model->newQuery();
     }
+
 }
