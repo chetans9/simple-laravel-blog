@@ -489,7 +489,6 @@ ul.navig li a.active{
 	margin: 9% auto 0;
 }
 .abt-2 ul li {
-	list-style-image: url(../images/dot.png);
 	margin: 12px 0px 5px 30px;
 	text-align: left;
 }
@@ -566,6 +565,14 @@ ul.navig li a.active{
 }
 .about-right {
 	text-align:center;
+}
+
+.categories-side{
+	padding: 0px 20px 0px 20px;
+}
+
+div.categories-side > ul > li a{
+	font-size: 18px;
 }
 .abt-one {
 	margin-top:12%;

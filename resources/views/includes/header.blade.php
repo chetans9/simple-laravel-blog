@@ -2,7 +2,7 @@
     <div class="header-top">
         <div class="container">
             <div class="head-main">
-                <a href="index.html"><img src="{{url('images/logo-1.png')}}" alt="" /></a>
+                <a href="{{url('/')}}"><h3>Blog Writer</h3></a>
             </div>
         </div>
     </div>

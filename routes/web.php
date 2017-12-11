@@ -20,7 +20,8 @@ Route::get('/', 'Home\HomeController@index');
 Route::get("/admin","Auth\LoginController@showLoginForm")->name('login');
 Route::post("/login","Auth\LoginController@login");
 
-Route::get("/blog/post/{id}","Blog\PostsController@show");
+Route::get("/blog/post/{id}","Blog\PostsController@show")->name('post');
+Route::get("/blog/category/{id}","Blog\PostCategoriesController@show")->name('post_category');
 
 
 //------------------------------About Us---------------------------------------//

@@ -13,8 +13,20 @@ class PostCategoriesRepository extends Repository
      *
      * @return mixed
      */
+ 
     function model()
     {
         return 'App\Models\PostCategoriesModel';
+    }
+
+    public function paginateCategoryPosts($category)
+    {
+        $this->model = $category;
+        return $this->model->posts()->paginate(10);
+    }
+
+    public function findActive($id)
+    {
+        return $this->model->where('active','1')->findOrFail($id);
     }
 }

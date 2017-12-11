@@ -18,13 +18,18 @@ class PostsRepository extends Repository
         return 'App\Models\PostsModel';
     }
 
+     public function findActive($id)
+    {
+        return $this->model->where('active','1')->findOrFail($id);
+    }
+
 
     /**
      * 
      */
     public function getRecentPosts()
     {
-    	return $this->model->OrderBy('created_at','Desc')->limit(6)->get();
+    	return $this->model->OrderBy('created_at','Desc')->where('active','1')->limit(6)->get();
     }
 
      public function getFeaturedPosts()

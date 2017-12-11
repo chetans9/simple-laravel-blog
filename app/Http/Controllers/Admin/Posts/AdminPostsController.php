@@ -122,7 +122,7 @@ class AdminPostsController extends Controller
               
         $inputs['user_id'] = Auth::user()->id;
         $inputs['slug'] = str_slug($inputs['title'], '-');
-        if($inputs['featured_image'])
+        if($request->hasFile('featured_image'))
         {
             $image_path = uploadWithThumb($inputs['featured_image'],'images/blog');
             $inputs['featured_image'] = $image_path;   

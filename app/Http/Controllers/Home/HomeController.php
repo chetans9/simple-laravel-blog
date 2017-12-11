@@ -17,15 +17,15 @@ class HomeController extends Controller
 
     protected $userRepository;
 
-    protected $posts_categories;
+    protected $postCategoriesRepository;
 
 
-	 public function __construct(PostsRepository $posts,UserRepository $users, PostCategoriesRepository $posts_categories)
+	 public function __construct(PostsRepository $posts,UserRepository $users, PostCategoriesRepository $postCategoriesRepository)
     {
-        $this->middleware('auth');
+        
         $this->postsRepository = $posts;
         $this->userRepository = $users;
-        $this->posts_categories = $posts_categories;
+        $this->postCategoriesRepository = $postCategoriesRepository;
     }
 
 
@@ -38,6 +38,11 @@ class HomeController extends Controller
 
     	$data = array();
         $data['recent_posts'] = $this->postsRepository->getRecentPosts();
+
+        $data['post_categories'] = $this->postCategoriesRepository->all();
+
+        
+
 
         $data['featured_posts'] = $this->postsRepository->getFeaturedPosts();
     	return view('home',$data);

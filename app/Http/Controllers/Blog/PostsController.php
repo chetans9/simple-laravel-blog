@@ -10,7 +10,7 @@ use App\Repositories\PostsRepository;
 
 class PostsController extends Controller
 {
-	protected $categoriesRepository;
+	  protected $PostCategoriesRepository;
 
     protected $usersRepository;
 
@@ -26,7 +26,7 @@ class PostsController extends Controller
     }
    	public function show($id)
    	{
-   		$data['post'] = $this->postsRepository->find($id);
+   		$data['post'] = $this->postsRepository->findActive($id);
    		return view("blog.post",$data);
 
    	}
