@@ -3,7 +3,7 @@
 @section('content')
 
 <section>
-  @include('back.includes.alerts')
+  @include('includes.admin.alerts')
   <div class="container-fluid text-right" style="margin-bottom: 16px;">
     <a class="btn btn-success" href="{{url('/admin/posts-categories/create')}}">
       Add New
@@ -25,7 +25,7 @@
       <td>{{$post->name}}</td>
       <td>{{$post->active}}</td>
       <td>
-      <a href="{{url('admin/posts/'.$post->id.'/edit')}}" class="btn btn-primary">
+      <a href="{{route('posts-categories.edit',['id'=>$post->id])}}" class="btn btn-primary">
         <span class="glyphicon glyphicon-edit"></span>
       </a>
       <a href="{{url('admin/posts/delete')}}" class="btn btn-danger">

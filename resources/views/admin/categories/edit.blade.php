@@ -7,7 +7,7 @@
             @include('back.includes.alerts')
 
             {{Form::model($post, ['route' => ['posts.update', $post],'method'=>'PATCH'])}}
-            @include('back.posts.form')
+            @include('admin.categories.form')
             <div class="form-group text-center">
                 <input type="submit" class="btn btn-primary" value="Save">
             </div>
