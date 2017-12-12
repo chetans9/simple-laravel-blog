@@ -14,11 +14,11 @@ use Auth;
 class HomeController extends Controller
 {
 	protected $postsRepository;
-
+    
     protected $userRepository;
-
+    
     protected $postCategoriesRepository;
-
+    
 
 	 public function __construct(PostsRepository $posts,UserRepository $users, PostCategoriesRepository $postCategoriesRepository)
     {
@@ -29,20 +29,19 @@ class HomeController extends Controller
     }
 
 
-	/**
-	 * 
-	 * 
-	 */
+    /**
+     * Show home page
+     *  
+     * 
+     * @return view
+     */
     public function index()
     {
 
     	$data = array();
         $data['recent_posts'] = $this->postsRepository->getRecentPosts();
 
-        $data['post_categories'] = $this->postCategoriesRepository->all();
-
-        
-
+        $data['post_categories'] = $this->postCategoriesRepository->getActive();
 
         $data['featured_posts'] = $this->postsRepository->getFeaturedPosts();
     	return view('home',$data);

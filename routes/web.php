@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'Home\HomeController@index');
+Route::get('/', 'Home\HomeController@index')->name('home');
 
 
 //-------------------------------Admin-------------------------------------------//
@@ -21,6 +21,7 @@ Route::get("/admin","Auth\LoginController@showLoginForm")->name('login');
 Route::post("/login","Auth\LoginController@login");
 
 Route::get("/blog/post/{id}","Blog\PostsController@show")->name('post');
+Route::post("/blog/post/{id}/save-comment","Blog\PostsController@storeComment");
 Route::get("/blog/category/{id}","Blog\PostCategoriesController@show")->name('post_category');
 
 
@@ -32,9 +33,11 @@ Route::get("gallery","Gallery\GalleryController@index");
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/dashboard', 'Admin\Dashboard\AdminDashboardController@index');
+    Route::get('/dashboard', 'Admin\Dashboard\AdminDashboardController@index')->name('admin.dashboard');
     Route::resource('posts', 'Admin\Posts\AdminPostsController');
     Route::resource('posts-categories','Admin\Posts\AdminPostsCategoriesController');
+    Route::get('/comments','Admin\Comments\AdminCommentsController@index');
+    Route::get('/comments/{id}/edit','Admin\Comments\AdminCommentsController@edit')->name("admin.comments.edit");
 
 });
 

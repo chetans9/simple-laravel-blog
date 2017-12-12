@@ -18,9 +18,14 @@ class PostsRepository extends Repository
         return 'App\Models\PostsModel';
     }
 
+    /**
+     * Get only active posts. Note that the method also eager loads comments. 
+     */
      public function findActive($id)
     {
-        return $this->model->where('active','1')->findOrFail($id);
+        return $this->model->with(["comments"=>function($query){
+            $query->where('active','1');
+        }])->where('active','1')->findOrFail($id);
     }
 
 

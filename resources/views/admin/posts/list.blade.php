@@ -14,9 +14,7 @@
     <tr>
       <th>#</th>
       <th>Post Title</th>
-      <th>Summary</th>
-      <th>active</th>
-
+      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -25,8 +23,8 @@
     <tr>
       <td>{{$post->id}}</td>
       <td>{{$post->title}}</td>
-      <td>{{$post->summary}}</td>
-      <td>{{$post->active}}</td>
+      
+      <td>@if($post->active==1) <span class="label label-success">Active</span> @else <span class="label label-danger">Deactivated</span> @endif</td>
       <td>
       <a href="{{url('admin/posts/'.$post->id.'/edit')}}" class="btn btn-primary">
         <span class="glyphicon glyphicon-edit"></span>

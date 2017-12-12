@@ -14,40 +14,38 @@
                 </ul>
                 <p>{!!$post->content!!}</p>
             </div>
+             <div class="comment-bottom heading">
+                <h3>Leave a Comment</h3>
+                    @include('includes.alerts')
+                {{-- <form> --}}
+                    {{Form::open(['url'=>'blog/post/'.$post->id.'/save-comment','method'=>'POST'])}}
+                    {{-- <input type="text" value="Name" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Name';}"> --}}
+                    {{Form::text('user_name',null,["placeholder"=>"Name"])}}
+                   {{--  <input type="text" value="Email" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Email';}"> --}}
+                     {{Form::text('user_email',null,["placeholder"=>"Email"])}}
+                    {{-- <textarea cols="77" rows="6" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea> --}}
+                    {{Form::textarea('content',null,["cols"=>"77","row"=>"6","placeholder"=>"Comment"])}}
+                    <input type="submit" value="Send">
+                    {{Form::close()}}
+                {{-- </form> --}}
+            </div>
             <div class="comments heading">
                 <h3>Comments</h3>
+                @foreach($post->comments as $comment)
                 <div class="media">
                     <div class="media-body">
-                        <h4 class="media-heading">  Richard Spark</h4>
-                        <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs .  </p>
+                        <h4 class="media-heading">{{$comment->user_name}}</h4>
+                        <p>{{$comment->content}} </p>
                     </div>
                     <div class="media-right">
                         <a href="#">
                         <img src="images/si.png" alt=""> </a>
                     </div>
                 </div>
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img src="images/si.png" alt="">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Joseph Goh</h4>
-                        <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs .  </p>
-                    </div>
-                </div>
+                @endforeach
+               
             </div>
-            <div class="comment-bottom heading">
-                <h3>Leave a Comment</h3>
-                <form>
-                    <input type="text" value="Name" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Name';}">
-                    <input type="text" value="Email" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Email';}">
-                    <input type="text" value="Subject" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Subject';}">
-                    <textarea cols="77" rows="6" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
-                    <input type="submit" value="Send">
-                </form>
-            </div>
+
         </div>
     </div>
 </div>
