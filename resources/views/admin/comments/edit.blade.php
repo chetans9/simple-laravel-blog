@@ -6,7 +6,7 @@
         <div class="col-md-12">
             @include('includes.admin.alerts')
 
-            {{Form::model($comment,['method'=>'PATCH'])}}
+            {{Form::model($comment,[ 'route' => array('admin.comments.update', $comment->id),'method'=>'PATCH'])}}
             
 
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -22,6 +22,17 @@
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                 {{Form::label('user_email', 'User Email')}}
                 {{Form::text("user_email", null, array("class"=>"form-control","id"=>"user_email"))}}
+                @if ($errors->has('user_email'))
+                    <span class="help-block">
+                            <strong>{{ $errors->first('user_name') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                {{Form::label('blog_title', 'Blog')}}
+                {{--{{Form::text("post[title]", null, array("class"=>"form-control","id"=>"blog_title","disabled"=>"disabled"))}}--}}
+                <a href="{{route('posts.edit',$comment->post->id)}}">{{$comment->post->title}}</a>
                 @if ($errors->has('user_email'))
                     <span class="help-block">
                             <strong>{{ $errors->first('user_name') }}</strong>

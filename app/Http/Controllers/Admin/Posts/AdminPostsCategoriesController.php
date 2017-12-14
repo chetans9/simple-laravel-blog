@@ -32,7 +32,7 @@ class AdminPostsCategoriesController extends Controller
         $list = $this->PostCategoriesRepository->paginate(50);
 
 
-        return view('admin.categories.list',compact('list'));
+        return view('admin.post_categories.list',compact('list'));
         //
     }
 
@@ -43,7 +43,7 @@ class AdminPostsCategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.post_categories.create');
     }
 
     /**
@@ -88,7 +88,11 @@ class AdminPostsCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $post_category = $this->PostCategoriesRepository->find($id);
+        $data['post_category'] = $post_category;
+        return view('admin.post_categories.edit',$data);
+        
     }
 
     /**
@@ -100,7 +104,16 @@ class AdminPostsCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'active' => 'required',
+        ]);
+        $inputs = $request->all();
+        $post_category = $this->PostCategoriesRepository->update($inputs,$id);
+
+        $request->session()->flash('success', 'Category Updated Successfully!');
+        return redirect(route('posts-categories.index'));
+        
     }
 
     /**

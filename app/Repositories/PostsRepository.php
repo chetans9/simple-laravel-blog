@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Repositories\Contracts\RepositoryInterface;
 use App\Repositories\Eloquent\Repository;
+use File;
 
 class PostsRepository extends Repository
 {
@@ -19,7 +20,9 @@ class PostsRepository extends Repository
     }
 
     /**
-     * Get only active posts. Note that the method also eager loads comments. 
+     * Get only active posts. Note that the method also eager loads comments.
+     *
+     * @return mixed
      */
      public function findActive($id)
     {
@@ -30,7 +33,9 @@ class PostsRepository extends Repository
 
 
     /**
-     * 
+     * Get Recent Posts to display on home page
+     *
+     * @return mixed
      */
     public function getRecentPosts()
     {
@@ -40,5 +45,25 @@ class PostsRepository extends Repository
      public function getFeaturedPosts()
     {
     	return $this->model->where('featured_post','1')->get();
+    }
+
+    /**
+     * Delete Post along with its relations.
+     *
+     * @param $id
+     * @return mixed|void
+     */
+    public function delete($id)
+    {
+        $this->model = $this->model->find($id);
+        foreach ($this->model->featured_image as $image) {
+            $image_path = public_path().$image;
+            if(File::exists($image_path))
+            {
+                File::delete($image_path);
+            }   
+        }
+        $this->model->comments()->delete();
+        $this->model->delete();
     }
 }

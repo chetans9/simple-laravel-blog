@@ -17,5 +17,10 @@ class CommentsRepository extends Repository
     {
         return 'App\Models\CommentsModel';
     }
+
+    function all($columns=array('*'))
+    {
+        return $this->model->with(['post'])->get();
+    }
     
 }

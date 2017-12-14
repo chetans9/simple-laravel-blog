@@ -36,8 +36,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', 'Admin\Dashboard\AdminDashboardController@index')->name('admin.dashboard');
     Route::resource('posts', 'Admin\Posts\AdminPostsController');
     Route::resource('posts-categories','Admin\Posts\AdminPostsCategoriesController');
-    Route::get('/comments','Admin\Comments\AdminCommentsController@index');
+    Route::get('/comments','Admin\Comments\AdminCommentsController@index')->name('admin.comments');
     Route::get('/comments/{id}/edit','Admin\Comments\AdminCommentsController@edit')->name("admin.comments.edit");
+    Route::patch('/comments/{id}','Admin\Comments\AdminCommentsController@update')->name('admin.comments.update');
+    Route::delete('/comments/{id}','Admin\Comments\AdminCommentsController@destroy')->name('admin.comments.delete');
 
 });
 

@@ -15,7 +15,7 @@ class ImagePath
 
 	function __construct($relative_path)
 	{
-		$this->original = asset($relative_path);
+		$this->original = $relative_path;
 
 		$base_name = basename($relative_path);
 		$thumb_path = str_replace($base_name, "thumb_" . $base_name , $relative_path);

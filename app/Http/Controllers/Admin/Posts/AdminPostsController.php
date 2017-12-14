@@ -140,6 +140,8 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->postsRepository->delete($id);
+        \Session::flash('info','Post deleted Successfully');
+        return redirect(url('admin/posts'));
     }
 }

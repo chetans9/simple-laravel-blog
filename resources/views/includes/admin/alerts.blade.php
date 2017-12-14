@@ -14,7 +14,14 @@
         <button data-dismiss="alert" class="close">&times;</button>
         {{Session::get('warning')}}
     </div>
+@elseif(Session::has('info'))
+    <div class="alert alert-info">
+        <button data-dismiss="alert" class="close">&times;</button>
+        {{Session::get('info')}}
+    </div>
 @endif
+
+
 
 
 

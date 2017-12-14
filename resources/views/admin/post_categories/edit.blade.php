@@ -4,10 +4,10 @@
 
     <div class="row">
         <div class="col-md-12">
-            @include('back.includes.alerts')
+            @include('includes.admin.alerts')
 
-            {{Form::model($post, ['route' => ['posts.update', $post],'method'=>'PATCH'])}}
-            @include('admin.categories.form')
+            {{Form::model($post_category, ['route' => ['posts-categories.update', $post_category],'method'=>'PATCH'])}}
+            @include('admin.post_categories.form')
             <div class="form-group text-center">
                 <input type="submit" class="btn btn-primary" value="Save">
             </div>
