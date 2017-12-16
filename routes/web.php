@@ -41,6 +41,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::patch('/comments/{id}','Admin\Comments\AdminCommentsController@update')->name('admin.comments.update');
     Route::delete('/comments/{id}','Admin\Comments\AdminCommentsController@destroy')->name('admin.comments.delete');
 
+    Route::resource('gallery',"Admin\Gallery\AdminGalleryController");
+
+    Route::resource('users','Admin\Users\AdminUsersController');
+
 });
 
 

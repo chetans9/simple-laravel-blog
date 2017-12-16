@@ -42,7 +42,7 @@ body a:hover{
 	text-align:center;
 }
 .header-top{
-	padding:2em 0px;
+	padding:1em 0px;
 }
 /*--Header-top-end--*/
 /*--Header-Starts--*/
@@ -52,7 +52,7 @@ body a:hover{
 .header-right {
 	float: right;
 }
-.logo a {
+/*.logo a {
 	display: block;
 }
 .logo h1 a{
@@ -69,6 +69,9 @@ body a:hover{
 	-moz-transition: 0.5s all ease;
 	-o-transition: 0.5s all ease;
 	-ms-transition: 0.5s all ease;
+}*/
+#logoMain{
+	height: 90px;
 }
 .head {
     position: relative;

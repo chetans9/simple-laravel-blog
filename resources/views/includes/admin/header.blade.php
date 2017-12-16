@@ -253,7 +253,13 @@
                             <a href="{{url('admin/comments')}}"><i class="fa fa-comments" aria-hidden="true"></i> Comments</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery</a>
+                            <a href="{{url('admin/tags')}}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a>
+                        </li>
+                        <li>
+                            <a href="{{route('gallery.index')}}"><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery</a>
+                        </li>
+                        <li>
+                            <a href="{{route('users.index')}}"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Users</a>
                         </li>
                     </ul>
                 </div>

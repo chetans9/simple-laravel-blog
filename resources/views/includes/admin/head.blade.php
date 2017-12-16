@@ -14,6 +14,8 @@
 
     <!-- Custom CSS -->
     <link href="{{ URL::asset('back/css/sb-admin-2.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ URL::asset('back/css/custom.css') }}" rel="stylesheet">
 
     
 

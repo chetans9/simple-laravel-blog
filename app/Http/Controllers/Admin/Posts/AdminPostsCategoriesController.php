@@ -14,13 +14,14 @@ class AdminPostsCategoriesController extends Controller
 
     protected $users;
 
-    public function __construct(UserRepository $users,PostCategoriesRepository $categories)
+    public function __construct(UserRepository $users, PostCategoriesRepository $categories)
     {
         $this->middleware('auth');
         $this->PostCategoriesRepository = $categories;
         $this->users = $users;
 
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +33,7 @@ class AdminPostsCategoriesController extends Controller
         $list = $this->PostCategoriesRepository->paginate(50);
 
 
-        return view('admin.post_categories.list',compact('list'));
+        return view('admin.post_categories.list', compact('list'));
         //
     }
 
@@ -49,7 +50,7 @@ class AdminPostsCategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -62,7 +63,7 @@ class AdminPostsCategoriesController extends Controller
         $inputs = $request->all();
 
         $status = $this->PostCategoriesRepository->create($inputs);
-        ($status)? $request->session()->flash('success', 'New Category created Successfully!'): $request->session()->flash('fail', 'Failed!');
+        ($status) ? $request->session()->flash('success', 'New Category created Successfully!') : $request->session()->flash('fail', 'Failed!');
 
         return redirect("admin/posts-categories");
 
@@ -72,7 +73,7 @@ class AdminPostsCategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -83,7 +84,7 @@ class AdminPostsCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -91,15 +92,15 @@ class AdminPostsCategoriesController extends Controller
 
         $post_category = $this->PostCategoriesRepository->find($id);
         $data['post_category'] = $post_category;
-        return view('admin.post_categories.edit',$data);
-        
+        return view('admin.post_categories.edit', $data);
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -109,21 +110,24 @@ class AdminPostsCategoriesController extends Controller
             'active' => 'required',
         ]);
         $inputs = $request->all();
-        $post_category = $this->PostCategoriesRepository->update($inputs,$id);
+        $post_category = $this->PostCategoriesRepository->update($inputs, $id);
 
         $request->session()->flash('success', 'Category Updated Successfully!');
         return redirect(route('posts-categories.index'));
-        
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $this->PostCategoriesRepository->delete($id);
+        \Session::flash('info','Category deleted Successfully');
+        return redirect(route('posts-categories.index'));
+
     }
 }
