@@ -15,10 +15,9 @@
                     <span class="menu"></span>
                     <ul class="navig">
                         <li><a href="{{url('/')}}" @if(Request::segment('1') == '') class="active" @endif>Home</a></li>
-                        <li><a href="{{url('/about')}}" @if(Request::segment('1') == 'about') class="active" @endif>About</a></li>
                         <li><a href="{{url('/gallery')}}" @if(Request::segment('1') == 'gallery') class="active" @endif>Gallery</a></li>
-                        <li><a href="typo.html">Typo</a></li>
-                        <li><a href="contact.html" @if(Request::segment('1') == 'contact') class="active" @endif>Contact</a></li>
+                        <li><a href="{{url('/about')}}" @if(Request::segment('1') == 'about') class="active" @endif>About</a></li>
+                        <li><a href="{{url('/contact')}}" @if(Request::segment('1') == 'contact') class="active" @endif>Contact</a></li>
                     </ul>
                 </div>
                 <div class="header-right">

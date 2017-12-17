@@ -19,6 +19,7 @@ Route::get('/', 'Home\HomeController@index')->name('home');
 //Auth::routes();
 Route::get("/admin","Auth\LoginController@showLoginForm")->name('login');
 Route::post("/login","Auth\LoginController@login");
+Route::post("/logout","Auth\LoginController@logout")->name('logout');
 
 Route::get("/blog/post/{id}","Blog\PostsController@show")->name('post');
 Route::post("/blog/post/{id}/save-comment","Blog\PostsController@storeComment");
@@ -27,6 +28,8 @@ Route::get("/blog/category/{id}","Blog\PostCategoriesController@show")->name('po
 
 //------------------------------About Us---------------------------------------//
 Route::get("about","About\AboutUsController@index");
+Route::get("contact","Contact\ContactUsController@index");
+Route::post("contact","Contact\ContactUsController@store");
 
 Route::get("gallery","Gallery\GalleryController@index");
 

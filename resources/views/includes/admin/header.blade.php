@@ -219,11 +219,16 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li>
+                            <a href="{{route('logout')}}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
@@ -257,6 +262,9 @@
                         </li>
                         <li>
                             <a href="{{route('gallery.index')}}"><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-phone fa-fw" aria-hidden="true"></i>Contact</a>
                         </li>
                         <li>
                             <a href="{{route('users.index')}}"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Users</a>

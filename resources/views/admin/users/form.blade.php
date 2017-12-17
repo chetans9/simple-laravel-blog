@@ -1,7 +1,7 @@
 
 
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-    {{Form::label('name', 'name *')}}
+    {{Form::label('name', 'Name *')}}
     {{Form::text("name", null, array("class"=>"form-control","id"=>"name"))}}
     @if ($errors->has('name'))
         <span class="help-block">
@@ -19,56 +19,23 @@
     @endif
 </div>
 
-<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-    {{Form::label('password', 'Password *')}}
+<div class="form-group{{ $errors->has('new_password') ? ' has-error' : '' }}">
+    {{Form::label('new_password', 'Password *')}}
 
-    {{Form::text("password", null, array("class"=>"form-control","id"=>"password"))}}
-    @if ($errors->has('content'))
+    {{Form::password("new_password",array("class"=>"form-control","id"=>"new_password"))}}
+    @if ($errors->has('new_password'))
         <span class="help-block">
-                <strong>{{ $errors->first('content') }}</strong>
+                <strong>{{ $errors->first('new_password') }}</strong>
         </span>
     @endif
 </div>
 
 <div class="form-group{{ $errors->has('confirm_password') ? ' has-error ':''}}">
 {{Form::label('confirm_password','Confirm password * ')}}
-    {{Form::text('confirm_password',null,array("class"=>"form-control","id"=>"confirm_password"))}}
-
-        <img id="preview_featured_image" class="inputImgPreview" src="" class="img-thumbnail"/>
-    @if ($errors->has('featured_image'))
+    {{Form::password('confirm_password',array("class"=>"form-control","id"=>"confirm_password"))}}
+    @if ($errors->has('confirm_password'))
         <span class="help-block">
-                <strong>{{ $errors->first('featured_image') }}</strong>
-        </span>
-    @endif
-</div>
-
-
-<div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
-    <label>Active : </label>
-    <label class="radio-inline">
-        {{Form::radio('active','1',null,['id'=>'yes'])}} Yes
-    </label>
-    <label class="radio-inline">
-        {{Form::radio('active','0',null,['id'=>'yes'])}} No
-    </label>
-    @if ($errors->has('active'))
-        <span class="help-block">
-                <strong>{{ $errors->first('active') }}</strong>
-        </span>
-    @endif
-</div>
-
-<div class="form-group{{ $errors->has('featured_post') ? ' has-error' : '' }}">
-    <label>Featured : </label>
-    <label class="radio-inline">
-        {{Form::radio('featured_post','1',null,['id'=>'yes'])}} Yes
-    </label>
-    <label class="radio-inline">
-        {{Form::radio('featured_post','0',true,['id'=>'yes'])}} No
-    </label>
-    @if ($errors->has('featured_post'))
-        <span class="help-block">
-                <strong>{{ $errors->first('featured_post') }}</strong>
+                <strong>{{ $errors->first('confirm_password') }}</strong>
         </span>
     @endif
 </div>

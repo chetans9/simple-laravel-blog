@@ -1,3 +1,4 @@
+<script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {

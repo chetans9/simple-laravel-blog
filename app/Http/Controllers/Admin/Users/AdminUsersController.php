@@ -49,11 +49,15 @@ class AdminUsersController extends Controller
     {
         $this->validate($request,[
             'name'=>'required',
+            'email'=>'required|email|unique:users,email',
+            'new_password'=>'required|min:6',
+            'confirm_password'=>'required|min:6|same:new_password',
             ]);
         $inputs = $request->all();
+        //assign 'new_password' to fillable 'password' attribute
+        $inputs['password'] = $inputs['new_password'];
         $this->userRepositoy->create($inputs);
-
-        //
+        return redirect(route('users.index'));
     }
 
 
@@ -66,8 +70,9 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.users.create');
-        //
+        $data['user'] = $this->userRepositoy->find($id);
+
+        return view('admin.users.edit',$data);
     }
 
     /**
@@ -79,17 +84,39 @@ class AdminUsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name'=>'required',
+            'email'=>'required|email|unique:users,email',
+            'new_password'=>'required|min:6',
+            'confirm_password'=>'required|min:6|same:new_password',
+        ]);
+        $inputs = $request->all();
+
+        if($inputs['new_password'])
+        {
+            $inputs['password'] = bcrypt($inputs['new_password']);
+        }
+
+        $this->userRepositoy->update($inputs,$id);
+
+        $request->session()->flash('success','User updated successfully');
+
+        return redirect(route('users.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete User.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
+        $this->userRepositoy->delete($id);
+
+        $request->session()->flash('info','User deleted successfully');
+        return redirect()->back();
         //
     }
 }

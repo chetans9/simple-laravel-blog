@@ -728,7 +728,7 @@ div.categories-side > ul > li a{
 .contact-text {
 	margin-top: 4%;
 }
-.contact-right input[type="text"] {
+.contact-right input[type="text"],.contact-right input[type="email"]  {
 	width: 49%;
 	margin: 0px;
 	font-size: 14px;
