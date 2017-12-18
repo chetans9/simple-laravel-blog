@@ -3,34 +3,34 @@
 <section>
   @include('includes.admin.alerts')
   <div class="container-fluid text-right" style="margin-bottom: 16px;">
-    <a class="btn btn-success" href="{{url('/admin/posts/create')}}">
-      Add New
-    </a>
+
   </div>
   <table class="table">
     <thead>
       <tr>
         <th>#</th>
-        <th>Post Title</th>
-        <th>Status</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Seen</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      @foreach($list as $post)
+      @foreach($list as $contact)
       <tr>
-        <td>{{$post->id}}</td>
-        <td>{{$post->title}}</td>
+        <td>{{$contact->id}}</td>
+        <td>{{$contact->name}}</td>
+        <td>{{$contact->email}}</td>
         
-        <td>@if($post->active==1) <span class="label label-success">Active</span> @else <span class="label label-danger">Deactivated</span> @endif</td>
+        <td>@if($contact->active==1) <span class="label label-success">Active</span> @else <span class="label label-danger">Deactivated</span> @endif</td>
         <td>
-          <a href="{{url('admin/posts/'.$post->id.'/edit')}}" class="btn btn-primary">
+          <a href="{{url('admin/posts/'.$contact->id.'/edit')}}" class="btn btn-primary">
             <span class="glyphicon glyphicon-edit"></span>
           </a>
-          <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$post->id}}">
+          <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$contact->id}}">
             <span class="glyphicon glyphicon-trash"></span>
           </a>
-          <div class="modal fade" id="deleteModal{{$post->id}}" role="dialog">
+          <div class="modal fade" id="deleteModal{{$contact->id}}" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -41,7 +41,7 @@
                   <p>Are you sure you want to delete this post?</p>
                 </div>
                 <div class="modal-footer">
-                  {{Form::open(['url'=>url('admin/posts/'.$post->id),'method'=>'delete'])}}
+                  {{Form::open(['url'=>url('admin/posts/'.$contact->id),'method'=>'delete'])}}
                   <button type="submit" class="btn btn-default">Yes</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                   {{Form::close()}}

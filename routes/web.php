@@ -45,7 +45,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('/comments/{id}','Admin\Comments\AdminCommentsController@destroy')->name('admin.comments.delete');
 
     Route::resource('gallery',"Admin\Gallery\AdminGalleryController");
-
+    Route::get('contact',"Admin\Contact\AdminContactController@index");
     Route::resource('users','Admin\Users\AdminUsersController');
 
 });

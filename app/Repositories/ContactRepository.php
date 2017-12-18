@@ -18,4 +18,32 @@ class ContactRepository extends Repository
         return 'App\Models\ContactModel';
     }
 
+    /**
+     * Get number of unread contact us request.
+     *
+     * @return mixed
+     */
+    function countUnreadContact()
+    {
+        return $this->model->where('seen','!=','1')->count();
+    }
+
+    /**
+     * Mark Contact row as read.
+     *
+     * @param $id
+     */
+    function markAsRead($id)
+    {
+        $model = $this->model->find($id);
+        if($model->seen == '0')
+        {
+            $model->read = 1;
+            return $model->save();
+        }
+        return;
+
+
+    }
+
 }
