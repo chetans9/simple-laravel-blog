@@ -10,14 +10,14 @@ use App\Repositories\PostCategoriesRepository;
 class AdminPostsCategoriesController extends Controller
 {
 
-    protected $categories;
+    protected $postCategoriesRepository;
 
     protected $users;
 
     public function __construct(UserRepository $users, PostCategoriesRepository $categories)
     {
         $this->middleware('auth');
-        $this->PostCategoriesRepository = $categories;
+        $this->postCategoriesRepository = $categories;
         $this->users = $users;
 
     }
@@ -30,7 +30,7 @@ class AdminPostsCategoriesController extends Controller
     public function index()
     {
 
-        $list = $this->PostCategoriesRepository->paginate(50);
+        $list = $this->postCategoriesRepository->paginate(50);
 
 
         return view('admin.post_categories.list', compact('list'));
@@ -62,22 +62,11 @@ class AdminPostsCategoriesController extends Controller
         ]);
         $inputs = $request->all();
 
-        $status = $this->PostCategoriesRepository->create($inputs);
+        $status = $this->postCategoriesRepository->create($inputs);
         ($status) ? $request->session()->flash('success', 'New Category created Successfully!') : $request->session()->flash('fail', 'Failed!');
 
         return redirect("admin/posts-categories");
 
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
         //
     }
 
@@ -90,7 +79,7 @@ class AdminPostsCategoriesController extends Controller
     public function edit($id)
     {
 
-        $post_category = $this->PostCategoriesRepository->find($id);
+        $post_category = $this->postCategoriesRepository->find($id);
         $data['post_category'] = $post_category;
         return view('admin.post_categories.edit', $data);
 
@@ -110,7 +99,7 @@ class AdminPostsCategoriesController extends Controller
             'active' => 'required',
         ]);
         $inputs = $request->all();
-        $post_category = $this->PostCategoriesRepository->update($inputs, $id);
+        $post_category = $this->postCategoriesRepository->update($inputs, $id);
 
         $request->session()->flash('success', 'Category Updated Successfully!');
         return redirect(route('posts-categories.index'));
@@ -125,7 +114,7 @@ class AdminPostsCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $this->PostCategoriesRepository->delete($id);
+        $this->postCategoriesRepository->delete($id);
         \Session::flash('info','Category deleted Successfully');
         return redirect(route('posts-categories.index'));
 

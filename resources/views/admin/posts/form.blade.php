@@ -1,5 +1,7 @@
 
-
+@section('page_css')
+<link href="{{URL::asset('back/css/select2.min.css')}}" rel="stylesheet" type="text/css">
+@endsection
 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
     {{Form::label('title', 'Post title *')}}
     {{Form::text("title", null, array("class"=>"form-control","id"=>"title"))}}
@@ -30,11 +32,21 @@
     @endif
 </div>
 
+<div class="form-group{{ $errors->has('tags[]') ? ' has-error' : '' }}">
+    {{Form::label('tags', 'Tags')}}
+    {{Form::select("tags[]",$post_tags, null, array("class"=>"form-control","id"=>"tags","multiple"=>"multiple"))}}
+    @if ($errors->has('tags[]'))
+        <span class="help-block">
+                <strong>{{ $errors->first('tags[]') }}</strong>
+        </span>
+    @endif
+</div>
+
 <div class="form-group{{ $errors->has('featured_image') ? ' has-error ':''}}">
 {{Form::label('featured_image','Featured image * ')}}
     {{Form::file('featured_image',null,array("class"=>"form-control","id"=>"featured_image"))}}
 
-        <img id="preview_featured_image" class="inputImgPreview" src="" class="img-thumbnail"/>
+        <img id="preview_featured_image" class="inputImgPreview" src="@if(isset($post)){{$post->featured_image->thumb}} @endif" class="img-thumbnail"/>
     @if ($errors->has('featured_image'))
         <span class="help-block">
                 <strong>{{ $errors->first('featured_image') }}</strong>
@@ -77,6 +89,7 @@
 @section('page_scripts')
 
     <script type="text/javascript" src="{{URL::asset('back/js/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('back/js/select2.min.js')}}"></script>
 
     <script type="text/javascript">
         CKEDITOR.replace( 'content' );
@@ -95,6 +108,30 @@
         }
         $("#featured_image").change(function() {
             readURL(this);
+        });
+
+        $(document).ready(function() {
+            $("#tags").select2({
+                minimumInputLength: 2,
+                multiple: true,
+                quietMillis: 100,
+                ajax: {
+                    url: '{{url('admin/tags-suggest')}}',
+                    dataType: 'json',
+                    data : function (params) {
+                        var query = {
+                            search: params.term,
+                        }
+                        return query;
+                        
+                    },
+                    processResults : function (data) {
+                        return {
+                            results: data.results
+                        };
+                    }
+                }
+            });
         });
     </script>
 @endsection

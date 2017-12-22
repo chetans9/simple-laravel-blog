@@ -8,9 +8,15 @@ use App\Repositories\TagsRepository;
 
 class AdminTagsController extends Controller
 {
+    /**
+     * @var TagsRepository
+     */
     protected $tagsRepository;
 
-
+    /**
+     * AdminTagsController constructor.
+     * @param TagsRepository $tagsRepository
+     */
     public function __construct(TagsRepository $tagsRepository)
     {
         $this->tagsRepository = $tagsRepository;
@@ -26,6 +32,13 @@ class AdminTagsController extends Controller
         $data['tags'] = $this->tagsRepository->all();
         return view('admin.tags.list',$data);
     }
+    public function showTagsSuggestions(Request $request)
+    {
+        $inputs = $request->all();
+        $return['results'] = $this->tagsRepository->getTagsSuggestion($inputs);
+
+        return response()->json($return);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +48,6 @@ class AdminTagsController extends Controller
     public function create()
     {
         return view('admin.tags.create');
-        //
     }
 
     /**

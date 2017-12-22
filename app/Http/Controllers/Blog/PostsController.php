@@ -10,14 +10,27 @@ use App\Repositories\UserRepository;
 use App\Repositories\CommentsRepository;
 
 class PostsController extends Controller {
-	
 
+    /**
+     * @var UserRepository
+     */
 	protected $usersRepository;
-
+    /**
+     * @var PostsRepository
+     */
 	protected $postsRepository;
-
+    /**
+     * @var CommentsRepository
+     */
     protected $commentsRepository;
 
+    /**
+     * PostsController constructor.
+     *
+     * @param PostsRepository $postsRepository
+     * @param UserRepository $usersRepository
+     * @param CommentsRepository $commentsRepository
+     */
 	public function __construct(PostsRepository $postsRepository, UserRepository $usersRepository, CommentsRepository $commentsRepository) 
     {
 		

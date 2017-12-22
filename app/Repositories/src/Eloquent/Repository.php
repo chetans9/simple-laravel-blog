@@ -101,6 +101,16 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
+     * @param $id
+     * @param array $columns
+     * @return mixed
+     */
+    public function findOrFail($id, $columns = array('*'))
+    {
+        return $this->model->findOrFail($id, $columns);
+    }
+
+    /**
      * @param $attribute
      * @param $value
      * @param array $columns

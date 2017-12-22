@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 use App\Repositories\PostsRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\PostCategoriesRepository;
+use App\Repositories\TagsRepository;
 use Auth;
 class AdminPostsController extends Controller
 {
@@ -18,12 +19,15 @@ class AdminPostsController extends Controller
 
     protected $posts_categories;
 
-    public function __construct(PostsRepository $posts,UserRepository $users, PostCategoriesRepository $posts_categories)
+    protected $tagsRepository;
+
+    public function __construct(PostsRepository $posts,UserRepository $users, PostCategoriesRepository $posts_categories,TagsRepository $tagsRepository)
     {
         $this->middleware('auth');
         $this->postsRepository = $posts;
         $this->userRepository = $users;
         $this->posts_categories = $posts_categories;
+        $this->tagsRepository = $tagsRepository;
     }
 
     /**
@@ -46,6 +50,8 @@ class AdminPostsController extends Controller
     {
         $data = array();
         $categories = $this->posts_categories->getForSelect("name","id");
+
+        $data['post_tags'] = array();
         $data['categories'] = $categories;
         return view("admin.posts.create",$data);
     }
@@ -70,6 +76,7 @@ class AdminPostsController extends Controller
         $inputs['user_id'] = Auth::user()->id;
         $inputs['slug'] = str_slug($inputs['title'], '-');
 
+
         if($inputs['featured_image'])
         {
             $image_path = uploadWithThumb($inputs['featured_image'],'images/blog');
@@ -93,9 +100,18 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         $data = array();
-
-        $data['post'] = $this->postsRepository->find($id);
+        $post = $this->postsRepository->findOrFail($id);
         $categories = $this->posts_categories->getForSelect("name","id");
+        //Tags should be populated in edit form
+
+        $post_tags = $post->tags()->select("tags.id",'name')->get()->toArray();
+        $tags =array();
+        foreach ($post_tags as $tag)
+        {
+            $tags[$tag['id']] = $tag['name'];
+        }
+        $data['post_tags'] = $tags;
+        $data['post'] = $post;
         $data['categories'] = $categories;
 
         return view("admin.posts.edit",$data);

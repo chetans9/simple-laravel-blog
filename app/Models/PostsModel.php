@@ -47,4 +47,9 @@ class PostsModel extends Model
     {
         return $this->hasMany('App\Models\CommentsModel','post_id');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\TagsModel','post_tag','post_id','tag_id');
+    }
 }

@@ -1,5 +1,10 @@
 @extends('layouts.admin.template')
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Tags</h1>
+        </div>
+    </div>
     <section>
         <div class="container-fluid text-right" style="margin-bottom: 16px;">
             <a class="btn btn-success" href="{{route('tags.create')}}">

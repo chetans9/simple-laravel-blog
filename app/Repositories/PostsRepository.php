@@ -31,6 +31,37 @@ class PostsRepository extends Repository
         }])->where('active','1')->findOrFail($id);
     }
 
+    public function create(array $inputs)
+    {
+        $model = $this->model->create($inputs);
+
+        //save tags relation if users adds tags
+        if(isset($inputs['tags']) && !empty($inputs['tags']))
+        {
+            $model->tags()->attach($inputs['tags']);
+        }
+        return $model;
+    }
+
+    /**
+     * Update post along with relations like tags.
+     *
+     * @param array $inputs
+     * @param $id
+     * @param string $attribute
+     * @return mixed|void
+     */
+    public function update(array $inputs, $id, $attribute = "id")
+    {
+        $model = $this->model->find($id);
+
+        $model->update($inputs);
+
+        if(isset($inputs['tags']) && !empty($inputs['tags']))
+        {
+            $model->tags()->sync($inputs['tags']);
+        }
+    }
 
     /**
      * Get Recent Posts to display on home page
@@ -42,6 +73,11 @@ class PostsRepository extends Repository
     	return $this->model->OrderBy('created_at','Desc')->where('active','1')->limit(6)->get();
     }
 
+    /**
+     * Get featured posts
+     *
+     * @return mixed
+     */
      public function getFeaturedPosts()
     {
     	return $this->model->where('featured_post','1')->get();
