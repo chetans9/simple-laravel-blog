@@ -37,7 +37,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $list = $this->postsRepository->paginate(50);
+        $list = $this->postsRepository->paginate(10);
         return view('admin.posts.list',compact('list'));
     }
 

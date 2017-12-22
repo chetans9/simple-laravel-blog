@@ -59,6 +59,11 @@
       @endforeach
     </tbody>
   </table>
-</div>
+
 </section>
+  <div class="row">
+    <div class="col-lg-offset-4">
+      {{$list->links()}}
+    </div>
+  </div>
 @endsection

@@ -25,7 +25,7 @@ class AdminContactController extends Controller
     public function index()
     {
 
-        $data['list'] = $this->contactRepository->all();
+        $data['list'] = $this->contactRepository->paginate(10);
 
         return view('admin.contact.list',$data);
     }
