@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('gallery',"Admin\Gallery\AdminGalleryController");
     Route::get('contact',"Admin\Contact\AdminContactController@index");
+    Route::resource('tags',"Admin\Tags\AdminTagsController");
     Route::resource('users','Admin\Users\AdminUsersController');
 
 });
