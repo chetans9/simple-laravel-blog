@@ -15,7 +15,7 @@
         <div class="container-fluid text-right" style="margin-bottom: 16px;">
 
         </div>
-        <table class="table">
+        <table class="table" id="list-table">
             <thead>
             <tr>
                 <th>#</th>
@@ -61,4 +61,13 @@
         </table>
         </div>
     </section>
+@endsection
+
+@section('page_scripts')
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+        $("#list-table").dataTable();
+    });
+</script>
 @endsection

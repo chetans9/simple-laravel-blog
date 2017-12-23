@@ -14,9 +14,9 @@
 
     <!-- Custom CSS -->
     <link href="{{ URL::asset('back/css/sb-admin-2.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('back/datatables/datatables.css') }}" rel="stylesheet" type="text/css">
     <!-- Custom CSS -->
     <link href="{{ URL::asset('back/css/custom.css') }}" rel="stylesheet">
-
     
 
     <!-- Custom Fonts -->
