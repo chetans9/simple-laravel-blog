@@ -133,6 +133,18 @@ abstract class Repository implements RepositoryInterface
         return $this->model->pluck($name,$value)->toArray();
     }
 
+    /**
+     * Return only Query builder.
+     *
+     * @param $name
+     * @param $value
+     * @return array
+     */
+    public function query()
+    {
+        return $this->model;
+    }
+
     public function getActive($active_column = 'active',$active_value = '1')
     {
         return $this->model->where($active_column,'=',$active_value)->get();
