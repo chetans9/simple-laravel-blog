@@ -140,9 +140,9 @@ abstract class Repository implements RepositoryInterface
      * @param $value
      * @return array
      */
-    public function query()
+    public function queryBuilder()
     {
-        return $this->model;
+        return $this->model->orderBy('created_at','desc');
     }
 
     public function getActive($active_column = 'active',$active_value = '1')

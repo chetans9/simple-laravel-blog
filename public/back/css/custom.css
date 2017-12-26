@@ -2,3 +2,7 @@
 	height: 150px;
 	margin-top: 10px;
 }
+
+.dataTable  tbody tr td >a {
+	margin-right: 5px;
+}

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Tags;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\TagsRepository;
-use App\Models\TagsModel;
 use Yajra\Datatables\Datatables;
 
 class AdminTagsController extends Controller
@@ -36,17 +35,19 @@ class AdminTagsController extends Controller
     {
         if($request->ajax())
         {
-            $model = $this->tagsRepository->query();
+            $model = $this->tagsRepository->queryBuilder();
             return Datatables::of($model)
-                ->addColumn('actions', function ($tags) use ($request) {
-                    return '<a href="'.$request->url().'/'.$tags->id .'/edit'.' " class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>'.
-                        '<a href="'.$request->url().'/'.$tags->id .'/edit'.' " class="btn btn-danger delete-data"><span class="glyphicon glyphicon-trash"></span></a>';
+                ->addColumn('actions', function ($modelData) use ($request) {
+                    $id = $modelData->id;
+                    $hrefs = $request->url().'/'.$id;
+                    return '<a href="'.$hrefs.'/edit'.' " class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>'.
+                        '<a href="" data-delete-url="'.$hrefs .'" class="btn btn-danger btn-sm delete-data" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash"></span></a>';
                 })->rawColumns(['actions'])
                 ->make(true);
         }
 
-        $data['tags'] = $this->tagsRepository->all();
-        return view('admin.tags.list',$data);
+       // $data['tags'] = $this->tagsRepository->all();
+        return view('admin.tags.list');
     }
 
     /**
@@ -122,6 +123,9 @@ class AdminTagsController extends Controller
      */
     public function destroy($id)
     {
+
         $this->tagsRepository->delete($id);
+
+        return redirect()->back()->with('info',"Tag deleted successfully.");
     }
 }

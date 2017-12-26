@@ -49,7 +49,7 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{URL::asset('back/js/sb-admin-2.js')}}"></script>
 <script src="{{URL::asset('back/datatables/datatables.min.js')}}"></script>
-
+<script src="{{URL::asset('back/js/global.js')}}"></script>
 @yield('page_scripts')
 
 </body>
