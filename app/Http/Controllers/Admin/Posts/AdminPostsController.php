@@ -10,17 +10,34 @@ use App\Repositories\UserRepository;
 use App\Repositories\PostCategoriesRepository;
 use App\Repositories\TagsRepository;
 use Auth;
+use Yajra\Datatables\Datatables;
 class AdminPostsController extends Controller
 {
-
+    /**
+     * @var PostsRepository
+     */
     protected $postsRepository;
-
+    /**
+     * @var UserRepository
+     */
     protected $userRepository;
-
+    /**
+     * @var PostCategoriesRepository
+     */
     protected $posts_categories;
-
+    /**
+     * @var TagsRepository
+     */
     protected $tagsRepository;
 
+    /**
+     * AdminPostsController constructor.
+     *
+     * @param PostsRepository $posts
+     * @param UserRepository $users
+     * @param PostCategoriesRepository $posts_categories
+     * @param TagsRepository $tagsRepository
+     */
     public function __construct(PostsRepository $posts,UserRepository $users, PostCategoriesRepository $posts_categories,TagsRepository $tagsRepository)
     {
         $this->middleware('auth');
@@ -31,13 +48,41 @@ class AdminPostsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display the list of Posts. If Request is ajax, return json response for dataTables.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
      */
-    public function index()
+    public function index(Request $request)
     {
-        $list = $this->postsRepository->paginate(10);
+        if($request->ajax())
+        {
+            $model = $this->postsRepository->queryBuilder();
+            return Datatables::of($model)
+                ->addColumn('status',function ($model) use ($request){
+
+                    //Status label html
+                    return "ee";
+                    //$actionHtml = ($model->active==1) ?  '<span class="label label-success">Active</span>' :'<span class="label label-danger">Deactivated</span>';
+
+                    //return $actionHtml;
+
+                })
+                ->addColumn('actions', function ($model) use ($request) {
+                    $id = $model->id;
+                    $link = $request->url().'/'.$id;
+                    //Edit Button
+                    $actionHtml = '<a href="'.$link.'/edit'.' " class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>';
+                    //Delete Button
+                    $actionHtml .='<a href="" data-delete-url="'.$link .'" class="btn btn-danger btn-sm delete-data" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash"></span></a>';
+
+                    return $actionHtml;
+                })
+                ->rawColumns(['actions','status'])
+                ->make(true);
+        }
+        //$list = $this->postsRepository->paginate(10);
         return view('admin.posts.list',compact('list'));
     }
 

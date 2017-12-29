@@ -37,11 +37,15 @@ class AdminTagsController extends Controller
         {
             $model = $this->tagsRepository->queryBuilder();
             return Datatables::of($model)
-                ->addColumn('actions', function ($modelData) use ($request) {
-                    $id = $modelData->id;
-                    $hrefs = $request->url().'/'.$id;
-                    return '<a href="'.$hrefs.'/edit'.' " class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>'.
-                        '<a href="" data-delete-url="'.$hrefs .'" class="btn btn-danger btn-sm delete-data" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash"></span></a>';
+                ->addColumn('actions', function ($model) use ($request) {
+                    $id = $model->id;
+                    $link = $request->url().'/'.$id;
+                    //Edit Button
+                    $actionHtml = '<a href="'.$link.'/edit'.' " class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>';
+                    //Delete Button
+                    $actionHtml .='<a href="" data-delete-url="'.$link .'" class="btn btn-danger btn-sm delete-data" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash"></span></a>';
+
+                    return $actionHtml;
                 })->rawColumns(['actions'])
                 ->make(true);
         }

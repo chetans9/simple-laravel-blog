@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Comments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\CommentsRepository;
+use Yajra\Datatables\Datatables;
 
 class AdminCommentsController extends Controller
 {
@@ -17,16 +18,39 @@ class AdminCommentsController extends Controller
     }
 
     /**
-     * Show list of comments
+     * Show List of Comments
      *
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
      */
-    public function index()
+    public function index(Request $request)
     {
-    	$comments = $this->commentsRepository->all();
-    	$data['comments'] = $comments;
 
-    	return view('admin.comments.list',$data);
+        if($request->ajax())
+        {
+            $model = $this->commentsRepository->queryBuilder();
+            return Datatables::of($model)
+                ->addColumn('actions', function ($model) use ($request) {
+                    $id = $model->id;
+                    $link = $request->url().'/'.$id;
+                    //Edit Button
+                    $actionHtml = '<a href="'.$link.'/edit'.' " class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>';
+                    //Delete Button
+                    $actionHtml .='<a href="" data-delete-url="'.$link .'" class="btn btn-danger btn-sm delete-data" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash"></span></a>';
+                    return $actionHtml;
+                })
+                ->addColumn('post',function ($model) use ($request){
+                    //Show Post title on which user has Commented
+                    $actionHtml = $model->post->title;
+                    return $actionHtml;
+                })
+
+                ->rawColumns(['actions','status'])
+                ->make(true);
+        }
+
+    	return view('admin.comments.list');
     }
 
     /**
