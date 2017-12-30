@@ -22,8 +22,10 @@
                 </div>
                 <div class="header-right">
                     <div class="search-bar">
-                        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                        {{Form::open(['url'=>route('blog.search'),'method'=>'get'])}}
+                        {{Form::text('search_str',null,[])}}
                         <input type="submit" value="">
+                        {{Form::close()}}
                     </div>
                     <ul>
                         <li><a href="#"><span class="fb"> </span></a></li>

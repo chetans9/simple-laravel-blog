@@ -29,7 +29,7 @@
         
         <td>@if($contact->active==1) <span class="label label-success">Active</span> @else <span class="label label-danger">Deactivated</span> @endif</td>
         <td>
-          <a href="{{url('admin/posts/'.$contact->id.'/edit')}}" class="btn btn-primary">
+          <a href="{{route('admin.contact.show',$contact->id)}}" class="btn btn-primary">
             <span class="glyphicon glyphicon-edit"></span>
           </a>
           <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$contact->id}}">

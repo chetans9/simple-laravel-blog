@@ -24,6 +24,7 @@ Route::post("/logout","Auth\LoginController@logout")->name('logout');
 Route::get("/blog/post/{id}","Blog\PostsController@show")->name('post');
 Route::post("/blog/post/{id}/save-comment","Blog\PostsController@storeComment");
 Route::get("/blog/category/{id}","Blog\PostCategoriesController@show")->name('post_category');
+Route::get('blog/search', 'Blog\SearchController@index')->name('blog.search');
 
 
 //------------------------------About Us---------------------------------------//
@@ -46,6 +47,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('gallery',"Admin\Gallery\AdminGalleryController");
     Route::get('contact',"Admin\Contact\AdminContactController@index");
+    Route::get('contact/{id}',"Admin\Contact\AdminContactController@show")->name('admin.contact.show');
     Route::resource('tags',"Admin\Tags\AdminTagsController");
     Route::get('tags-suggest',"Admin\Tags\AdminTagsController@showTagsSuggestions");
     Route::resource('users','Admin\Users\AdminUsersController');

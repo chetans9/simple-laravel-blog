@@ -83,6 +83,20 @@ class PostsRepository extends Repository
     	return $this->model->where('featured_post','1')->get();
     }
 
+    public function search($request)
+    {
+        $query = $this->model;
+        if($request->search_str)
+        {
+            $query = $query->where('title','like',"%$request[search_str]%");
+        }
+        $query = $query->where('active','1');
+
+        return $query->paginate(10);
+
+
+    }
+
     /**
      * Delete Post along with its relations.
      *

@@ -29,4 +29,12 @@ class AdminContactController extends Controller
 
         return view('admin.contact.list',$data);
     }
+
+    public function show($id)
+    {
+
+        $data['contact'] = $this->contactRepository->find($id);
+
+        return view('admin.contact.show',$data);
+    }
 }
