@@ -1,4 +1,4 @@
-<p align="center"><img src="https://blogwriter.000webhostapp.com/public/images/logo/logo.png" style="height: 90px;"></p>
+<p align="center"><img src="https://blogwriter.000webhostapp.com/public/images/logo/logo.png" height="90"></p>
 
 
 
