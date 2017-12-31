@@ -23,7 +23,7 @@ class ContactRepository extends Repository
      *
      * @return mixed
      */
-    function countUnreadContact()
+    public function countUnreadContact()
     {
         return $this->model->where('seen','!=','1')->count();
     }
@@ -33,12 +33,12 @@ class ContactRepository extends Repository
      *
      * @param $id
      */
-    function markAsRead($id)
+    public function markAsRead($id)
     {
         $model = $this->model->find($id);
         if($model->seen == '0')
         {
-            $model->read = 1;
+            $model->seen = 1;
             return $model->save();
         }
         return;

@@ -48,7 +48,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function all($columns = array('*'))
     {
-        return $this->model->get($columns);
+        return $this->model->orderBy('created_at','desc')->get($columns);
     }
 
     /**
@@ -58,7 +58,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function paginate($perPage = 15, $columns = array('*'))
     {
-        return $this->model->paginate($perPage, $columns);
+        return $this->model->orderBy('created_at','desc')->paginate($perPage, $columns);
     }
 
     /**

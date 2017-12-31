@@ -4,6 +4,8 @@
     <meta name="keywords" content="Laravel Blog" />
     {{-- Styles --}}
     <link href="{{URL::asset('css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
+    <!-- Custom Fonts -->
+    <link href={{asset("back/font-awesome/css/font-awesome.min.css")}} rel="stylesheet" type="text/css">
     <link href="{{URL::asset('css/style.css')}}" rel='stylesheet' type='text/css' />
 
 

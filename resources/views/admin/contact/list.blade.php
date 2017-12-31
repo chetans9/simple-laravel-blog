@@ -27,7 +27,7 @@
         <td>{{$contact->name}}</td>
         <td>{{$contact->email}}</td>
         
-        <td>@if($contact->active==1) <span class="label label-success">Active</span> @else <span class="label label-danger">Deactivated</span> @endif</td>
+        <td>@if($contact->seen==1) <span class="label label-success">seen</span> @else <span class="label label-warning">Unseen</span> @endif</td>
         <td>
           <a href="{{route('admin.contact.show',$contact->id)}}" class="btn btn-primary">
             <span class="glyphicon glyphicon-edit"></span>

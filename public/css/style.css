@@ -52,6 +52,7 @@ body a:hover{
 .header-right {
 	float: right;
 }
+
 /*.logo a {
 	display: block;
 }
@@ -761,6 +762,9 @@ div.categories-side > ul > li a{
 	-o-border-radius: 5px;
 	-ms-border-radius: 5px;
 }
+.comment-bottom{
+	margin-top: 15px;
+}
 .submit-btn input[type=submit],
 .comment-bottom input[type="submit"]{
 	color: #fff;
@@ -1376,6 +1380,9 @@ ul.navig li a {
 .abt-one {
     margin-top: 4.5%;
 }
+.recent-posts{
+	margin-bottom: 20px;
+}
 .heading h3,h3.ghj {
     padding: 8px 0px;
     font-size: 14px;
@@ -1790,6 +1797,11 @@ h2.head {
 .banner-text h2 {
     width: 45%;
 }
+}
+
+.abt-left{
+	padding-bottom: 20px;
+	padding-top: 20px;
 }
 @media (max-width:375px){
 .header-right ul {

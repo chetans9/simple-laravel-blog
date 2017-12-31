@@ -32,7 +32,7 @@ class AdminContactController extends Controller
 
     public function show($id)
     {
-
+        $this->contactRepository->markAsRead($id);
         $data['contact'] = $this->contactRepository->find($id);
 
         return view('admin.contact.show',$data);

@@ -19,7 +19,7 @@
 					</div>
 				@endforeach	
 				<div class="text-center">
-					{{ $search_results->links()}}
+					{{ $search_results->appends(['search_str'=>Request::get('search_str')])->links()}}
 				</div>
 											
 		</div>
