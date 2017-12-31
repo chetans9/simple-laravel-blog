@@ -62,12 +62,6 @@ class AdminPostsController extends Controller
             return Datatables::of($model)
                 ->addColumn('status',function ($model) use ($request){
 
-                    //Status label html
-                    return "ee";
-                    //$actionHtml = ($model->active==1) ?  '<span class="label label-success">Active</span>' :'<span class="label label-danger">Deactivated</span>';
-
-                    //return $actionHtml;
-
                 })
                 ->addColumn('actions', function ($model) use ($request) {
                     $id = $model->id;
@@ -82,7 +76,6 @@ class AdminPostsController extends Controller
                 ->rawColumns(['actions','status'])
                 ->make(true);
         }
-        //$list = $this->postsRepository->paginate(10);
         return view('admin.posts.list',compact('list'));
     }
 

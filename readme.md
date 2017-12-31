@@ -1,4 +1,4 @@
-<p align="center"><img src="https://blogwriter.000webhostapp.com/public/images/logo/logo.png"></p>
+<p align="center"><img src="https://blogwriter.000webhostapp.com/public/images/logo/logo.png" style="height: 90px;"></p>
 
 
 
@@ -15,6 +15,14 @@ Application is easy to learn and use.
 - Contact form.
 - Gallery.
 - User management.
+
+## Live Demo
+https://blogwriter.000webhostapp.com/public/
+
+credentials :
+
+-username : admin@blogwriter.com
+-passwrod : 123456 
 
 
 More features/Improvements will be added over time.
