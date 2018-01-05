@@ -4,7 +4,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Blog writer - Admin</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ URL::asset('back/css/bootstrap.min.css') }}" rel="stylesheet">

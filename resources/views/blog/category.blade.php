@@ -4,8 +4,9 @@
 
 <div class="container">
     <div class="single-top">
-        <div class="abt-2">
+        <div class="category-blog-list">
 			<h3>{{$category->name}}</h3>
+			<hr>
 				@foreach($posts as $post)
 					<div class="might-grid">
 						<div class="grid-might">
@@ -20,8 +21,7 @@
 				@endforeach	
 				<div class="text-center">
 					{{ $posts->links()}}
-				</div>
-											
+				</div>								
 		</div>
     </div>
 </div>

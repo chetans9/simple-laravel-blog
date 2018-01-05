@@ -120,7 +120,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 about-right heading">
-                    <div class="abt-2 categories-side">
+                    <div class="blog-list categories-side">
                         <h3>
                             CATEGORIES
                         </h3>

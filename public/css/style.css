@@ -105,6 +105,9 @@ ul.navig li a:hover{
 ul.navig li a:hover ul.navig li a:after{
 	display: block;
 }
+
+
+
 @media (max-width: 768px){
 span.menu:before {
 	content: url(../images/nav-icon.png);
@@ -429,11 +432,11 @@ ul.navig li a.active{
 	color: #999;
 	margin-top: 4%;
 }
-.abt-2{
+.blog-list{
 	margin-top:12%;
 }
 .might-grid {
-	padding: 9% 0 0;
+	padding: 5% 0 5%;
 }
 .grid-might img{
 	border-radius: 5px;
@@ -442,7 +445,7 @@ ul.navig li a.active{
 	-o-border-radius: 5px;
 	-ms-border-radius: 5px;
 }
-.abt-2 ul {
+.blog-list ul {
 	padding: 0;
 	margin-top: 8%;
 }
@@ -492,16 +495,16 @@ ul.navig li a.active{
 	width: 90%;
 	margin: 9% auto 0;
 }
-.abt-2 ul li {
+.blog-list ul li {
 	margin: 12px 0px 5px 30px;
 	text-align: left;
 }
-.abt-2 ul li a{
+.blog-list ul li a{
 	font-size:13px;
 	color:#999;
 	font-family: 'Raleway-Regular';
 }
-.abt-2 ul li a:hover{
+.blog-list ul li a:hover{
 	color:#190608;
 }
 .grid-might {
@@ -1399,7 +1402,7 @@ ul.navig li a {
     color: #999;
     padding: 6px 18px;
 }
-.abt-2 {
+.blog-list {
     margin-top: 5%;
 }
 .grid-might a img{
@@ -1420,7 +1423,7 @@ ul.navig li a {
 .might-grid:nth-child(2){
 	margin-top:2%;
 }
-.abt-2 ul {
+.blog-list ul {
     margin-top: 3%;
 }
 .news {
@@ -1691,7 +1694,7 @@ ul.navig {
     font-size: 12px;
     padding: 6px 10px;
 }
-.abt-2 {
+.blog-list {
     margin-top: 6%;
 }
 .news form input[type="submit"] {
@@ -1995,9 +1998,10 @@ ul.navig {
 .a-btn {
     margin-top: 3%;
 }
-.abt-2 {
+.blog-list {
     margin-top: 9%;
 }
+
 .might-top h4 {
     font-size: 14px;
 }
@@ -2013,7 +2017,7 @@ ul.navig {
 .might-grid:nth-child(2) {
     margin-top: 3%;
 }
-.abt-2 ul li {
+.blog-list ul li {
     margin: 9px 0px 0px 20px;
 }
 .news form input[type="text"] {
@@ -2038,10 +2042,10 @@ ul.navig {
 .footer {
     padding: 1em 0px;
 }
-.abt-2 ul li {
+.blog-list ul li {
     margin: 4px 0px 0px 20px;
 }
-.abt-2 ul {
+.blog-list ul {
     margin-top: 5%;
 }
 .welcome-bottom p {
@@ -2116,3 +2120,8 @@ ul.blog-ic {
 }
 }
 /*--media-quaries-end-here--*/
+
+
+.category-blog-list{
+	margin-top: 50px;
+}
