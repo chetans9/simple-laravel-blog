@@ -9,21 +9,6 @@
         </span>
     @endif
 </div>
-<div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
-    <label>Active : </label>
-    <label class="radio-inline">
-        {{Form::radio('active','1',null,['id'=>'yes'])}} Yes
-        {{--<input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked="">Yes--}}
-    </label>
-    <label class="radio-inline">
-        {{Form::radio('active','0',null,['id'=>'yes'])}} No
-    </label>
-    @if ($errors->has('active'))
-        <span class="help-block">
-                <strong>{{ $errors->first('active') }}</strong>
-        </span>
-    @endif
-</div>
 
 
 @section('page_scripts')

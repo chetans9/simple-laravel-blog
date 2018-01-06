@@ -15,8 +15,7 @@ class PostsCategories extends Migration
     {
          Schema::create('categories', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100);
-            $table->boolean('active')->default(false);
+            $table->string('name', 150);
             $table->timestamps();
         });
     }

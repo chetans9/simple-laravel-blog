@@ -8,7 +8,7 @@ class PostCategoriesModel extends Model
 {
     protected $table = "categories";
 
-    protected $fillable = ["name","active"];
+    protected $fillable = ["name"];
 
     public function posts()
     {

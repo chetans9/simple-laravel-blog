@@ -139,7 +139,21 @@
                     </div>
 
                 </div>
-                <div class="clearfix">
+
+                <div class="col-md-4 about-right heading">
+                    <div class="blog-list categories-side">
+                        <h3>
+                            TAGS
+                        </h3>
+
+                        <ul class="tags">
+                            <li><a href="#" class="tag">HTML</a></li>
+                            <li><a href="#" class="tag">CSS</a></li>
+                            <li><a href="#" class="tag">JavaScript</a></li>
+                        </ul>
+
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -18,7 +18,6 @@
             <tr>
                 <th>#</th>
                 <th>Category Name</th>
-                <th>active</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -27,7 +26,7 @@
                 <tr>
                     <td>{{$post_category->id}}</td>
                     <td>{{$post_category->name}}</td>
-                    <td>{{$post_category->active}}</td>
+
                     <td>
                         <a href="{{route('posts-categories.edit',['id'=>$post_category->id])}}" class="btn btn-primary">
                             <span class="glyphicon glyphicon-edit"></span>

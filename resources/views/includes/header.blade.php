@@ -28,11 +28,8 @@
                         {{Form::close()}}
                     </div>
                     <ul>
-                        <li><a href="#"><span class="fb"> </span></a></li>
-                        <li><a href="#"><span class="twit"> </span></a></li>
-                        <li><a href="#"><span class="pin"> </span></a></li>
-                        <li><a href="#"><span class="rss"> </span></a></li>
-                        <li><a href="#"><span class="drbl"> </span></a></li>
+                        <li><a href="#" class="share-item"><span class="fb"> </span></a></li>
+
                     </ul>
                 </div>
                 <div class="clearfix"></div>

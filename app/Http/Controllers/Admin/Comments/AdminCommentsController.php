@@ -62,7 +62,7 @@ class AdminCommentsController extends Controller
     public function edit($id)
     {
     	$comment = $this->commentsRepository->find($id);
-    	//dd($comment);
+
     	$data['comment'] = $comment;
 
     	return view('admin.comments.edit',$data);
@@ -71,7 +71,7 @@ class AdminCommentsController extends Controller
     public function update(Request $request,$id)
     {
         $inputs = $request->all();
-        $comment = $this->commentsRepository->update($inputs,$id);
+        $this->commentsRepository->update($inputs,$id);
         
         $request->session()->flash('success','Comment updated successfully');
 
