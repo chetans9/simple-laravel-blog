@@ -19,6 +19,11 @@ class GalleryRepository extends Repository
         return 'App\Models\GalleryModel';
     }
 
+    public function getActive()
+    {
+        return $this->model->orderBy('created_at','asc')->get();
+    }
+
     /**
      * Update the gallery. function first deletes the previous images. and new image paths are updated.
      *

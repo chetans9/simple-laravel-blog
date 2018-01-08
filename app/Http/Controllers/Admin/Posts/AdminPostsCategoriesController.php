@@ -34,7 +34,6 @@ class AdminPostsCategoriesController extends Controller
 
 
         return view('admin.post_categories.list', compact('list'));
-        //
     }
 
     /**
@@ -58,7 +57,7 @@ class AdminPostsCategoriesController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'active' => 'required',
+            // 'active' => 'required',
         ]);
         $inputs = $request->all();
 

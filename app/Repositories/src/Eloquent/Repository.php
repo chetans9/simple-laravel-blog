@@ -144,11 +144,6 @@ abstract class Repository implements RepositoryInterface
     {
         return $this->model->orderBy('created_at','desc');
     }
-
-    public function getActive($active_column = 'active',$active_value = '1')
-    {
-        return $this->model->where($active_column,'=',$active_value)->get();
-    }
     /**
      * @return \Illuminate\Database\Eloquent\Builder
      * @throws RepositoryException

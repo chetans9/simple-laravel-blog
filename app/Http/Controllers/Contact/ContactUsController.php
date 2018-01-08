@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\ContactRepository;
 
-class ContactusController extends Controller
+class ContactUsController extends Controller
 {
 
     protected $contactRepository;
@@ -39,7 +39,6 @@ class ContactusController extends Controller
 
 
         return response()->json($return);
-       // return redirect()->back()->with('success', 'Your request has been sent successfully');
 
     }
 

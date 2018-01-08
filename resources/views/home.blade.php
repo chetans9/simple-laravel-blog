@@ -4,6 +4,7 @@
     <div class="about">
         <div class="container">
             <div class="about-main">
+                
                 <div class="col-md-8 about-left">
                     @foreach($featured_posts as $featured_post)
                         <div class="about-one">
@@ -139,7 +140,8 @@
                     </div>
 
                 </div>
-
+            
+                
                 <div class="col-md-4 about-right heading">
                     <div class="blog-list categories-side">
                         <h3>
@@ -147,14 +149,16 @@
                         </h3>
 
                         <ul class="tags">
-                            <li><a href="#" class="tag">HTML</a></li>
-                            <li><a href="#" class="tag">CSS</a></li>
-                            <li><a href="#" class="tag">JavaScript</a></li>
+                            @foreach($tags as $tag)
+                            <li><a href="#" class="tag">{{$tag->name}}</a></li>
+                            @endforeach
                         </ul>
 
                     </div>
 
                 </div>
+
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
