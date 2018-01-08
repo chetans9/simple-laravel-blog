@@ -150,7 +150,7 @@
 
                         <ul class="tags">
                             @foreach($tags as $tag)
-                            <li><a href="#" class="tag">{{$tag->name}}</a></li>
+                            <li><a href="{{route('blog.search',['search_str' => $tag->name])}}" class="tag">{{$tag->name}}</a></li>
                             @endforeach
                         </ul>
 

@@ -24,11 +24,11 @@ class PostsRepository extends Repository
      *
      * @return mixed
      */
-     public function findActive($id)
+    public function findActive($id)
     {
-        return $this->model->with(["comments"=>function($query){
-            $query->where('active','1');
-        }])->where('active','1')->findOrFail($id);
+        return $this->model->with(["comments" => function ($query) {
+            $query->where('active', '1');
+        }])->where('active', '1')->findOrFail($id);
     }
 
     public function create(array $inputs)
@@ -36,8 +36,7 @@ class PostsRepository extends Repository
         $model = $this->model->create($inputs);
 
         //save tags relation if users adds tags
-        if(isset($inputs['tags']) && !empty($inputs['tags']))
-        {
+        if (isset($inputs['tags']) && !empty($inputs['tags'])) {
             $model->tags()->attach($inputs['tags']);
         }
         return $model;
@@ -57,8 +56,7 @@ class PostsRepository extends Repository
 
         $model->update($inputs);
 
-        if(isset($inputs['tags']) && !empty($inputs['tags']))
-        {
+        if (isset($inputs['tags']) && !empty($inputs['tags'])) {
             $model->tags()->sync($inputs['tags']);
         }
     }
@@ -70,7 +68,7 @@ class PostsRepository extends Repository
      */
     public function getRecentPosts()
     {
-    	return $this->model->OrderBy('created_at','Desc')->where('active','1')->limit(6)->get();
+        return $this->model->OrderBy('created_at', 'Desc')->where('active', '1')->limit(6)->get();
     }
 
     /**
@@ -78,19 +76,21 @@ class PostsRepository extends Repository
      *
      * @return mixed
      */
-     public function getFeaturedPosts()
+    public function getFeaturedPosts()
     {
-    	return $this->model->where('featured_post','1')->get();
+        return $this->model->where('featured_post', '1')->get();
     }
 
     public function search($request)
     {
         $query = $this->model;
-        if($request->search_str)
-        {
-            $query = $query->where('title','like',"%$request[search_str]%");
+        if ($request->search_str) {
+            $query = $query->where('title', 'like', "%$request[search_str]%")
+                ->orWhereHas('tags', function ($q) use ($request) {
+                    $q->where('name', '=', "$request[search_str]");
+                });
         }
-        $query = $query->where('active','1');
+        $query = $query->where('active', '1');
 
         return $query->paginate(10);
 
@@ -107,11 +107,10 @@ class PostsRepository extends Repository
     {
         $this->model = $this->model->find($id);
         foreach ($this->model->featured_image as $image) {
-            $image_path = public_path().$image;
-            if(File::exists($image_path))
-            {
+            $image_path = public_path() . $image;
+            if (File::exists($image_path)) {
                 File::delete($image_path);
-            }   
+            }
         }
         $this->model->comments()->delete();
         $this->model->delete();
