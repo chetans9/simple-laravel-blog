@@ -46,7 +46,7 @@ class HomeController extends Controller
 
         $data['post_categories'] = $this->postCategoriesRepository->all();
 
-        $data['tags'] = $this->tagsRepository->all();
+        $data['tags'] = $this->tagsRepository->getTagsHavingPosts();
 
         $data['featured_posts'] = $this->postsRepository->getFeaturedPosts();
     	return view('home',$data);

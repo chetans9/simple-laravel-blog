@@ -24,17 +24,23 @@ class PostsModel extends Model
     /**
      * Belongs to one relationship
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo('App\Models\CategoriesModel','category_id');
+        return $this->belongsToMany('App\Models\PostCategoriesModel','post_category','post_id','category_id');
     }
 
+    /**
+     * Accessor that returns an object/instance with path to different sized images.
+     *
+     * @param $value
+     * @return ImagePath
+     */
 
     public function getFeaturedImageAttribute($value)
     {
-        return new ImagePath($value);   
+        return new ImagePath($value);
     }
 
     

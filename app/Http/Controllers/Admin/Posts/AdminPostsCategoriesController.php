@@ -95,7 +95,6 @@ class AdminPostsCategoriesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'active' => 'required',
         ]);
         $inputs = $request->all();
         $post_category = $this->postCategoriesRepository->update($inputs, $id);

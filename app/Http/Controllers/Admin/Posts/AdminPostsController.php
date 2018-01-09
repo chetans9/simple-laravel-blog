@@ -105,7 +105,6 @@ class AdminPostsController extends Controller
 
         $this->validate($request, [
             'title' => 'required',
-            'category_id'=>'required',
             'content' => 'required',
             'active' => 'required',
             'featured_image'=>'required'

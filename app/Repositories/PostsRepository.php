@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Repositories;
-
-use App\Repositories\Contracts\RepositoryInterface;
 use App\Repositories\Eloquent\Repository;
 use File;
 
@@ -35,6 +33,9 @@ class PostsRepository extends Repository
     {
         $model = $this->model->create($inputs);
 
+        if (isset($inputs['categories']) && !empty($inputs['categories'])) {
+            $model->categories()->attach($inputs['categories']);
+        }
         //save tags relation if users adds tags
         if (isset($inputs['tags']) && !empty($inputs['tags'])) {
             $model->tags()->attach($inputs['tags']);
@@ -81,6 +82,12 @@ class PostsRepository extends Repository
         return $this->model->where('featured_post', '1')->get();
     }
 
+    /**
+     * Search Posts using title or tag
+     *
+     * @param $request
+     * @return mixed
+     */
     public function search($request)
     {
         $query = $this->model;
@@ -93,8 +100,6 @@ class PostsRepository extends Repository
         $query = $query->where('active', '1');
 
         return $query->paginate(10);
-
-
     }
 
     /**

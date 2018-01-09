@@ -11,12 +11,12 @@
         </span>
     @endif
 </div>
-<div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-    {{Form::label('category_id', 'Category *')}}
-    {{Form::select("category_id",[""=>"Select"]+$categories,null, array("class"=>"form-control","id"=>"category_id"))}}
-    @if ($errors->has('category_id'))
+<div class="form-group{{ $errors->has('categories') ? ' has-error' : '' }}">
+    {{Form::label('categories', 'Category *')}}
+    {{Form::select("categories[]",[""=>"Select"]+$categories,null, array("class"=>"form-control","id"=>"category_id"))}}
+    @if ($errors->has('categories'))
         <span class="help-block">
-                <strong>{{ $errors->first('category_id') }}</strong>
+                <strong>{{ $errors->first('categories') }}</strong>
         </span>
     @endif
 </div>
@@ -45,7 +45,6 @@
 <div class="form-group{{ $errors->has('featured_image') ? ' has-error ':''}}">
 {{Form::label('featured_image','Featured image * ')}}
     {{Form::file('featured_image',null,array("class"=>"form-control","id"=>"featured_image"))}}
-
         <img id="preview_featured_image" class="inputImgPreview" src="@if(isset($post)){{$post->featured_image->thumb}} @endif" class="img-thumbnail"/>
     @if ($errors->has('featured_image'))
         <span class="help-block">
@@ -58,7 +57,7 @@
 <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
     <label>Active : </label>
     <label class="radio-inline">
-        {{Form::radio('active','1',null,['id'=>'yes'])}} Yes
+        {{Form::radio('active','1',true,['id'=>'yes'])}} Yes
     </label>
     <label class="radio-inline">
         {{Form::radio('active','0',null,['id'=>'yes'])}} No

@@ -18,6 +18,16 @@ class TagsRepository extends Repository
     }
 
     /**
+     * Returns Tags which are assigned to some post.
+     *
+     * @return mixed
+     */
+    public function getTagsHavingPosts()
+    {
+        return $this->model->whereHas('posts')->get();
+    }
+
+    /**
      * Get tags
      * @param $inputs
      * @return mixed
