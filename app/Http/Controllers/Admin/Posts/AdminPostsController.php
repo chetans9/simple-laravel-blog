@@ -107,6 +107,7 @@ class AdminPostsController extends Controller
             'title' => 'required',
             'content' => 'required',
             'active' => 'required',
+            'categories'=>'required|array|min:1',
             'featured_image'=>'required'
         ]); 
         $inputs = $request->all();
@@ -169,6 +170,7 @@ class AdminPostsController extends Controller
             'title' => 'required',
             'content' => 'required',
             'active' => 'required',
+            'categories'=>'required|array|min:1'
         ]);
         
         $inputs = $request->all();

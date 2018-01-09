@@ -23,7 +23,7 @@ class AdminUsersController extends Controller
 
     public function index()
     {
-        $users = $this->userRepositoy->all();
+        $users = $this->userRepositoy->paginate(20);
         $data['users'] = $users;
 
         return view('admin.users.list',$data);

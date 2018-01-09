@@ -16,7 +16,7 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Post Title</th>
+        <th>Title</th>
         <th>Status</th>
         <th>Actions</th>
       </tr>
@@ -59,6 +59,8 @@
       @endforeach
     </tbody>
   </table>
+<div class="row">
+  {{$galleries->links()}}
 </div>
 </section>
 @endsection

@@ -13,7 +13,7 @@
 </div>
 <div class="form-group{{ $errors->has('categories') ? ' has-error' : '' }}">
     {{Form::label('categories', 'Category *')}}
-    {{Form::select("categories[]",[""=>"Select"]+$categories,null, array("class"=>"form-control","id"=>"category_id"))}}
+    {{Form::select("categories[]",$categories,null, array("class"=>"form-control","id"=>"categories","multiple"=>"multiple"))}}
     @if ($errors->has('categories'))
         <span class="help-block">
                 <strong>{{ $errors->first('categories') }}</strong>
@@ -110,6 +110,9 @@
         });
 
         $(document).ready(function() {
+
+            $("#categories").select2();
+
             $("#tags").select2({
                 minimumInputLength: 2,
                 multiple: true,

@@ -26,11 +26,9 @@ class AdminGalleryController extends Controller
      */
     public function index()
     {
-        $galleries = $this->galleryRepository->all();
+        $galleries = $this->galleryRepository->paginate(20);
         $data['galleries'] = $galleries;
         return view('admin.gallery.list',$data);
-
-        //
     }
 
     /**
@@ -55,6 +53,7 @@ class AdminGalleryController extends Controller
     {
         $this->validate($request,[
             'image_title' => 'required|max:200',
+            'image_desc' => 'required|max:25',
             'image' => 'required|mimes:jpeg,bmp,png,jpg|max:8000',
         ]);
         $inputs = $request->all();
@@ -75,16 +74,7 @@ class AdminGalleryController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -111,6 +101,7 @@ class AdminGalleryController extends Controller
 
         $this->validate($request,[
             'image_title' => 'required|max:200',
+            'image_desc' => 'required|max:25',
             'image' => 'mimes:jpeg,bmp,png,jpg|max:8000',
         ]);
         $inputs = $request->all();

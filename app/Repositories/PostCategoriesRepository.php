@@ -25,12 +25,12 @@ class PostCategoriesRepository extends Repository
      * @param $category
      * @return mixed
      */
-    public function getPostsByCategory($category)
+    public function paginatePostsByCategory($category)
     {
 
         $this->model = $category;
 
-        return $this->model->posts()->paginate(10);
+        return $this->model->posts()->where('posts.active','1')->paginate(10);
     }
 
     public function findActive($id)

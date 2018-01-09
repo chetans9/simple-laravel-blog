@@ -57,6 +57,10 @@ class PostsRepository extends Repository
 
         $model->update($inputs);
 
+        if (isset($inputs['categories']) && !empty($inputs['categories'])) {
+            $model->categories()->sync($inputs['categories']);
+        }
+
         if (isset($inputs['tags']) && !empty($inputs['tags'])) {
             $model->tags()->sync($inputs['tags']);
         }

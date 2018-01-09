@@ -16,11 +16,17 @@
 
 <!-- page-wrapper -->
     <div id="page-wrapper">
+        <div class="row">
+            <ul class="breadcrumb">
+                <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+                @foreach($breadcrumbs as $breadcrumb)
+                    <li><a href="{{$breadcrumb['url']}}">{{$breadcrumb['name']}}</a></li>
+                @endforeach
+            </ul>
+        </div>
         
     @yield('content')
-    <!-- /.row -->
 
-        <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
 

@@ -33,7 +33,7 @@ class PostCategoriesController extends Controller
     public function show($id)
     {
         $category  = $this->postCategoriesRepository->findActive($id);
-    	$posts = $this->postCategoriesRepository->getPostsByCategory($category);
+    	$posts = $this->postCategoriesRepository->paginatePostsByCategory($category);
     	$data['category'] = $category;
     	$data['posts'] = $posts;
     	return view('blog.category',$data);

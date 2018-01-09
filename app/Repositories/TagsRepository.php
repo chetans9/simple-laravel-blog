@@ -24,7 +24,7 @@ class TagsRepository extends Repository
      */
     public function getTagsHavingPosts()
     {
-        return $this->model->whereHas('posts')->get();
+        return $this->model->has('posts')->get();
     }
 
     /**
