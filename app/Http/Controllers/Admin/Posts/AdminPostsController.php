@@ -61,8 +61,10 @@ class AdminPostsController extends Controller
             $model = $this->postsRepository->queryBuilder();
             return Datatables::of($model)
                 ->addColumn('status',function ($model) use ($request){
-
+                    $statusHtml = ($model->active) ? '<span class="label label-success">Active</span>' :'<span class="label label-danger">Deactivated</span>';
+                    return $statusHtml;
                 })
+
                 ->addColumn('actions', function ($model) use ($request) {
                     $id = $model->id;
                     $link = $request->url().'/'.$id;
@@ -175,7 +177,7 @@ class AdminPostsController extends Controller
         
         $inputs = $request->all();
               
-        $inputs['user_id'] = Auth::user()->id;
+
         $inputs['slug'] = str_slug($inputs['title'], '-');
         if($request->hasFile('featured_image'))
         {

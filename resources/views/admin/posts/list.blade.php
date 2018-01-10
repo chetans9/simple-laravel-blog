@@ -22,41 +22,8 @@
       </tr>
     </thead>
     <tbody>
-      {{--@foreach($list as $post)--}}
-      {{--<tr>--}}
-        {{--<td>{{$post->id}}</td>--}}
-        {{--<td>{{$post->title}}</td>--}}
-        {{----}}
-        {{--<td>@if($post->active==1) <span class="label label-success">Active</span> @else <span class="label label-danger">Deactivated</span> @endif</td>--}}
-        {{--<td>--}}
-          {{--<a href="{{url('admin/posts/'.$post->id.'/edit')}}" class="btn btn-primary">--}}
-            {{--<span class="glyphicon glyphicon-edit"></span>--}}
-          {{--</a>--}}
-          {{--<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$post->id}}">--}}
-            {{--<span class="glyphicon glyphicon-trash"></span>--}}
-          {{--</a>--}}
-          {{--<div class="modal fade" id="deleteModal{{$post->id}}" role="dialog">--}}
-            {{--<div class="modal-dialog modal-lg">--}}
-              {{--<div class="modal-content">--}}
-                {{--<div class="modal-header">--}}
-                  {{--<button type="button" class="close" data-dismiss="modal">&times;</button>--}}
-                  {{--<h4 class="modal-title">Delete</h4>--}}
-                {{--</div>--}}
-                {{--<div class="modal-body">--}}
-                  {{--<p>Are you sure you want to delete this post?</p>--}}
-                {{--</div>--}}
-                {{--<div class="modal-footer">--}}
-                  {{--{{Form::open(['url'=>url('admin/posts/'.$post->id),'method'=>'delete'])}}--}}
-                  {{--<button type="submit" class="btn btn-default">Yes</button>--}}
-                  {{--<button type="button" class="btn btn-default" data-dismiss="modal">No</button>--}}
-                  {{--{{Form::close()}}--}}
-                {{--</div>--}}
-              {{--</div>--}}
-            {{--</div>--}}
-          {{--</div>--}}
-        {{--</td>--}}
-      {{--</tr>--}}
-      {{--@endforeach--}}
+    {{--DataTable content loads here--}}
+
     </tbody>
   </table>
 

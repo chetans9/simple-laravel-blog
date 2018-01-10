@@ -38,9 +38,9 @@ class CommentsRepository extends Repository
      *
      * @param $id
      */
-    function markAsRead($id)
+    function markAsRead($model)
     {
-        $model = $this->model->find($id);
+
         if($model->read == '0')
         {
             $model->read = 1;

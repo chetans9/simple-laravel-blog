@@ -63,6 +63,9 @@ class AdminCommentsController extends Controller
     {
     	$comment = $this->commentsRepository->find($id);
 
+
+        $this->commentsRepository->markAsRead($comment);
+
     	$data['comment'] = $comment;
 
     	return view('admin.comments.edit',$data);
