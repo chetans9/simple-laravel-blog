@@ -17,11 +17,11 @@ Application is easy to learn and use.
 - User management.
 
 ## Live Demo
-https://blogwriter.000webhostapp.com/public/
+http://freecs9.epizy.com/blog-writer/public/
 
 credentials :
 
--username : admin@blogwriter.com
+-username : admin@admin.com
 -passwrod : 123456 
 
 
