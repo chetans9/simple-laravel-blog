@@ -13,7 +13,6 @@
 
 Route::get('/', 'Home\HomeController@index')->name('home');
 
-
 //-------------------------------Admin-------------------------------------------//
 
 //Auth::routes();
@@ -52,6 +51,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('tags-suggest',"Admin\Tags\AdminTagsController@showTagsSuggestions");
     Route::resource('users','Admin\Users\AdminUsersController');
 
+});
+
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('config:clear');
+    // return what you want
 });
 
 
