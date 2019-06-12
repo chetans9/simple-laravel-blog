@@ -1,4 +1,4 @@
-<p align="center"><img src="https://blogwriter.000webhostapp.com/public/images/logo/logo.png" height="90"></p>
+<p align="center"><img src="http://freecs9.epizy.com/blog-writer/public/images/logo/logo.png" height="90"></p>
 
 
 
@@ -17,11 +17,11 @@ Application is easy to learn and use.
 - User management.
 
 ## Live Demo
-https://blogwriter.000webhostapp.com/public/
+http://freecs9.epizy.com/blog-writer/public/
 
 credentials :
 
--username : admin@blogwriter.com
+-username : admin@admin.com
 -passwrod : 123456 
 
 
