@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Contact;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\ContactRepository;
+use App\Models\ContactModel;
 
 class AdminContactController extends Controller
 {
@@ -13,28 +13,29 @@ class AdminContactController extends Controller
      */
     protected $contactRepository;
 
-    /**
-     * AdminContactController constructor.
-     * @param ContactRepository $contactRepository
-     */
-    public function __construct(ContactRepository $contactRepository)
+    public function __construct()
     {
-        $this->contactRepository = $contactRepository;
+        $this->middleware('auth');
     }
 
     public function index()
     {
 
-        $data['list'] = $this->contactRepository->paginate(10);
+        $data['list'] = ContactModel::paginate(10);
 
         return view('admin.contact.list',$data);
     }
 
     public function show($id)
     {
-        $this->contactRepository->markAsRead($id);
-        $data['contact'] = $this->contactRepository->find($id);
+        $contact = ContactModel::findOrFail($id);
 
+        if($contact->seen == '0'){
+            $contact->seen = '1';
+            $contact->save();
+        }
+
+        $data['contact'] = $contact;
         return view('admin.contact.show',$data);
     }
 }

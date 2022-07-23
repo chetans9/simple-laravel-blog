@@ -4,18 +4,13 @@ namespace App\Http\Controllers\Admin\Gallery;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\GalleryRepository;
+use App\Models\GalleryModel;
 
 class AdminGalleryController extends Controller
 {
-    /**
-     * @var
-     */
-    protected $galleryRepository;
 
-    public function __construct(GalleryRepository $galleryRepository)
+    public function __construct()
     {
-        $this->galleryRepository = $galleryRepository;
 
     }
 
@@ -26,7 +21,7 @@ class AdminGalleryController extends Controller
      */
     public function index()
     {
-        $galleries = $this->galleryRepository->paginate(20);
+        $galleries = GalleryModel::paginate(20);
         $data['galleries'] = $galleries;
         return view('admin.gallery.list',$data);
     }
@@ -67,8 +62,7 @@ class AdminGalleryController extends Controller
             $inputs['image'] = $image_path;
 
         }
-        $this->galleryRepository->create($inputs);
-
+        GalleryModel::create($inputs);
         return redirect(route('gallery.index'));
 
         //
@@ -84,7 +78,7 @@ class AdminGalleryController extends Controller
      */
     public function edit($id)
     {
-        $gallery = $this->galleryRepository->find($id);
+        $gallery = GalleryModel::find($id);
         $data['gallery'] = $gallery;
         return view('admin.gallery.edit',$data);
     }
@@ -113,7 +107,12 @@ class AdminGalleryController extends Controller
             $image_path = uploadWithThumb($inputs['image'],'images/gallery');
             $inputs['image'] = $image_path;
         }
-        $gallery = $this->galleryRepository->update($inputs,$id);
+
+        $gallery = GalleryModel::find($id);
+        $gallery->fill();
+        $gallery->save();
+
+
         $request->session()->flash('success','gallery updated successfully');
 
         return redirect(route('gallery.index'));
@@ -128,7 +127,7 @@ class AdminGalleryController extends Controller
      */
     public function destroy($id)
     {
-        $this->galleryRepository->delete($id);
+        GalleryModel::delete($id);
         \Session::flash("info","Gallery Image deleted successfully");
         return redirect()->back();
     }

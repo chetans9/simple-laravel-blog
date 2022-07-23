@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\UserRepository;
+use App\Models\User;
 
 class AdminUsersController extends Controller
 {
@@ -16,14 +16,14 @@ class AdminUsersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct(UserRepository $userRepositoy)
+    public function __construct()
     {
-        $this->userRepositoy = $userRepositoy;
+        
     }
 
     public function index()
     {
-        $users = $this->userRepositoy->paginate(20);
+        $users = User::paginate(20);
         $data['users'] = $users;
 
         return view('admin.users.list',$data);
@@ -52,11 +52,14 @@ class AdminUsersController extends Controller
             'email'=>'required|email|unique:users,email',
             'new_password'=>'required|min:6',
             'confirm_password'=>'required|min:6|same:new_password',
-            ]);
+        ]);
+
         $inputs = $request->all();
-        //assign 'new_password' to fillable 'password' attribute
-        $inputs['password'] = $inputs['new_password'];
-        $this->userRepositoy->create($inputs);
+        $user = new User();
+        $user->name = $inputs['name'];
+        $user->email = $inputs['email'];
+        $user->password = $inputs['new_password'];
+        $user->save();
         return redirect(route('users.index'));
     }
 
@@ -70,7 +73,7 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        $data['user'] = $this->userRepositoy->find($id);
+        $data['user'] = User::findOrFail($id);
 
         return view('admin.users.edit',$data);
     }
@@ -97,7 +100,11 @@ class AdminUsersController extends Controller
             $inputs['password'] = bcrypt($inputs['new_password']);
         }
 
-        $this->userRepositoy->update($inputs,$id);
+        $user = User::findOrFail($id);
+        $user->name = $inputs['name'];
+        $user->email = $inputs['email'];
+        $user->password = $inputs['password'];
+        $user->save();
 
         $request->session()->flash('success','User updated successfully');
 
@@ -113,10 +120,9 @@ class AdminUsersController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        $this->userRepositoy->delete($id);
+        User::delete($id);
 
         $request->session()->flash('info','User deleted successfully');
         return redirect()->back();
-        //
     }
 }

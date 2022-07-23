@@ -4,16 +4,14 @@ namespace App\Http\Controllers\Admin\Comments;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\CommentsRepository;
+use App\Models\CommentsModel;
 use Yajra\Datatables\Datatables;
 
 class AdminCommentsController extends Controller
 {
-	protected $commentsRepository;
 
-    public function __construct(CommentsRepository $commentsRepository)
+    public function __construct()
     {
-    	$this->commentsRepository = $commentsRepository;
     	$this->middleware('auth');
     }
 
@@ -29,7 +27,7 @@ class AdminCommentsController extends Controller
 
         if($request->ajax())
         {
-            $model = $this->commentsRepository->queryBuilder();
+            $model = new CommentsModel();
             return Datatables::of($model)
                 ->addColumn('actions', function ($model) use ($request) {
                     $id = $model->id;
@@ -61,21 +59,20 @@ class AdminCommentsController extends Controller
      */
     public function edit($id)
     {
-    	$comment = $this->commentsRepository->find($id);
-
-
-        $this->commentsRepository->markAsRead($comment);
-
+    	$comment = CommentsModel::findOrFail($id);
+        $comment->read = '1';
+        $comment->save();
     	$data['comment'] = $comment;
-
     	return view('admin.comments.edit',$data);
     }
 
     public function update(Request $request,$id)
     {
         $inputs = $request->all();
-        $this->commentsRepository->update($inputs,$id);
-        
+        $comment = CommentsModel::findOrFail($id);
+        $comment->fill($comment);
+        $comment->save();
+
         $request->session()->flash('success','Comment updated successfully');
 
         return redirect(route('admin.comments'));
@@ -84,7 +81,8 @@ class AdminCommentsController extends Controller
     public function destroy(Request $request,$id)
     {
         $inputs = $request->all();
-        $comment = $this->commentsRepository->delete($id);
+        $comment = CommentsModel::findOrFail($id);
+        $comment->delete($id);
         
         $request->session()->flash('info','Comment deleted successfully');
 

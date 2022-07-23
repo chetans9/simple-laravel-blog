@@ -5,46 +5,20 @@ namespace App\Http\Controllers\Admin\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
-use App\Repositories\PostsRepository;
+use App\Models\PostsModel;
 use App\Repositories\UserRepository;
-use App\Repositories\PostCategoriesRepository;
+use App\Models\PostCategoriesModel;
 use App\Repositories\TagsRepository;
 use Auth;
 use Yajra\Datatables\Datatables;
 class AdminPostsController extends Controller
 {
     /**
-     * @var PostsRepository
-     */
-    protected $postsRepository;
-    /**
-     * @var UserRepository
-     */
-    protected $userRepository;
-    /**
-     * @var PostCategoriesRepository
-     */
-    protected $posts_categories;
-    /**
-     * @var TagsRepository
-     */
-    protected $tagsRepository;
-
-    /**
      * AdminPostsController constructor.
-     *
-     * @param PostsRepository $posts
-     * @param UserRepository $users
-     * @param PostCategoriesRepository $posts_categories
-     * @param TagsRepository $tagsRepository
      */
-    public function __construct(PostsRepository $posts,UserRepository $users, PostCategoriesRepository $posts_categories,TagsRepository $tagsRepository)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->postsRepository = $posts;
-        $this->userRepository = $users;
-        $this->posts_categories = $posts_categories;
-        $this->tagsRepository = $tagsRepository;
     }
 
     /**
@@ -58,7 +32,7 @@ class AdminPostsController extends Controller
     {
         if($request->ajax())
         {
-            $model = $this->postsRepository->queryBuilder();
+            $model = new PostsModel();
             return Datatables::of($model)
                 ->addColumn('status',function ($model) use ($request){
                     $statusHtml = ($model->active) ? '<span class="label label-success">Active</span>' :'<span class="label label-danger">Deactivated</span>';
@@ -78,7 +52,7 @@ class AdminPostsController extends Controller
                 ->rawColumns(['actions','status'])
                 ->make(true);
         }
-        return view('admin.posts.list',compact('list'));
+        return view('admin.posts.list');
     }
 
     /**
@@ -89,8 +63,7 @@ class AdminPostsController extends Controller
     public function create()
     {
         $data = array();
-        $categories = $this->posts_categories->getForSelect("name","id");
-
+        $categories = PostCategoriesModel::pluck("name","id");
         $data['post_tags'] = array();
         $data['categories'] = $categories;
         return view("admin.posts.create",$data);

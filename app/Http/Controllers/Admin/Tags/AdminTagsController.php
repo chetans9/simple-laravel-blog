@@ -4,24 +4,14 @@ namespace App\Http\Controllers\Admin\Tags;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\TagsRepository;
+use App\Models\TagsModel;
 use Yajra\Datatables\Datatables;
 
 class AdminTagsController extends Controller
 {
-    /**
-     * @var TagsRepository
-     */
-    protected $tagsRepository;
-
-    /**
-     * AdminTagsController constructor.
-     *
-     * @param TagsRepository $tagsRepository
-     */
-    public function __construct(TagsRepository $tagsRepository)
+    public function __construct()
     {
-        $this->tagsRepository = $tagsRepository;
+        $this->middleware('auth');
     }
 
     /**
@@ -35,7 +25,7 @@ class AdminTagsController extends Controller
     {
         if($request->ajax())
         {
-            $model = $this->tagsRepository->queryBuilder();
+            $model = TagsModel::query();
             return Datatables::of($model)
                 ->addColumn('actions', function ($model) use ($request) {
                     $id = $model->id;
@@ -87,7 +77,7 @@ class AdminTagsController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->all();
-        $this->tagsRepository->create($inputs);
+        TagsModel::create($inputs);
         return redirect(route('tags.index'))->with('success','New tag created successfully');
     }
 
@@ -99,7 +89,7 @@ class AdminTagsController extends Controller
      */
     public function edit($id)
     {
-        $data['tag'] = $this->tagsRepository->find($id);
+        $data['tag'] = TagsModel::find($id);
         return view('admin.tags.edit',$data);
 
     }
@@ -114,7 +104,9 @@ class AdminTagsController extends Controller
     public function update(Request $request, $id)
     {
         $inputs = $request->all();
-        $this->tagsRepository->update($inputs,$id);
+        $tag = TagsModel::find($id);
+        $tag->fill($inputs);
+        $tag->save();
         return redirect(route('tags.index'))->with('success','Tag updated successfully');
 
     }
@@ -127,9 +119,8 @@ class AdminTagsController extends Controller
      */
     public function destroy($id)
     {
-
-        $this->tagsRepository->delete($id);
-
+        $tag = TagsModel::find($id);
+        $tag->delete($id);
         return redirect()->back()->with('info',"Tag deleted successfully.");
     }
 }

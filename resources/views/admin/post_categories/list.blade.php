@@ -28,7 +28,7 @@
                     <td>{{$post_category->name}}</td>
 
                     <td>
-                        <a href="{{route('posts-categories.edit',['id'=>$post_category->id])}}" class="btn btn-primary">
+                        <a href="{{route('posts-categories.edit',['posts_category'=>$post_category->id])}}" class="btn btn-primary">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
                         <a href="{{url('admin/posts/delete')}}" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$post_category->id}}">
