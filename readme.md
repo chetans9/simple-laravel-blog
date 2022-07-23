@@ -5,27 +5,20 @@
 
 ## About Blog Writer
 
-Blog Writer is a  open source blogging application written in laravel 9
-Application is easy to learn and use.
+Blog Writer is a  open source blogging application written in laravel 9. Application is easy to learn and use. Application features an admin panel to create new posts, categories and tags.
 
 ## Features
 - Manage articles and categories
-- Article comments.
-- Article Tags.
+- Commenting System.
+- Article Tags Managment.
 - Contact form.
-- Gallery.
+- Pictures Gallery.
 - User management.
+- WYSIWYG Editor
 
-## Live Demo
-http://freecs9.epizy.com/blog-writer/public/
+##Requirements
+- Requires a minimum PHP version of 8.0
 
-credentials :
-
--username : admin@admin.com
--passwrod : 123456 
-
-
-More features/Improvements will be added over time.
 
 ### Installation
 
