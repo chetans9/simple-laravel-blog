@@ -8,8 +8,6 @@ use App\Models\User;
 
 class AdminUsersController extends Controller
 {
-
-    protected $userRepositoy;
     /**
      * Display a listing of the resource.
      *

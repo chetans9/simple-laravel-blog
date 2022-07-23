@@ -27,7 +27,7 @@ class AdminCommentsController extends Controller
 
         if($request->ajax())
         {
-            $model = new CommentsModel();
+            $model = CommentsModel::query();
             return Datatables::of($model)
                 ->addColumn('actions', function ($model) use ($request) {
                     $id = $model->id;

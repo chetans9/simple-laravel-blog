@@ -4,25 +4,11 @@ namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\PostCategoriesRepository;
+use App\Models\PostCategoriesModel;
 
 
 class PostCategoriesController extends Controller
 {
-    /**
-     * @var PostCategoriesRepository
-     */
-	protected $postCategoriesRepository;
-
-    /**
-     * PostCategoriesController constructor.
-     *
-     * @param PostCategoriesRepository $postCategoriesRepository
-     */
-	public function __construct(PostCategoriesRepository $postCategoriesRepository)
-	{
-		$this->postCategoriesRepository = $postCategoriesRepository;
-	}
 
     /**
      * Show posts By category
@@ -32,8 +18,8 @@ class PostCategoriesController extends Controller
      */
     public function show($id)
     {
-        $category  = $this->postCategoriesRepository->findActive($id);
-    	$posts = $this->postCategoriesRepository->paginatePostsByCategory($category);
+        $category  = PostCategoriesModel::findOrFail($id);
+    	$posts = $category->posts()->where('posts.active','1')->paginate(10);
     	$data['category'] = $category;
     	$data['posts'] = $posts;
     	return view('blog.category',$data);

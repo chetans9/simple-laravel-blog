@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 use App\Models\PostsModel;
 use App\Repositories\UserRepository;
 use App\Models\PostCategoriesModel;
@@ -32,7 +33,7 @@ class AdminPostsController extends Controller
     {
         if($request->ajax())
         {
-            $model = new PostsModel();
+            $model = PostsModel::query();
             return Datatables::of($model)
                 ->addColumn('status',function ($model) use ($request){
                     $statusHtml = ($model->active) ? '<span class="label label-success">Active</span>' :'<span class="label label-danger">Deactivated</span>';
@@ -87,7 +88,7 @@ class AdminPostsController extends Controller
         ]); 
         $inputs = $request->all();
         $inputs['user_id'] = Auth::user()->id;
-        $inputs['slug'] = str_slug($inputs['title'], '-');
+        $inputs['slug'] = Str::slug($inputs['title'], '-');
 
 
         if($inputs['featured_image'])
@@ -97,8 +98,8 @@ class AdminPostsController extends Controller
         }
 
 
-        $status = $this->postsRepository->create($inputs);
-        ($status)? $request->session()->flash('success', 'Post Successfull!'): $request->session()->flash('failure', 'Failed!');
+        PostsModel::create($inputs);
+        $request->session()->flash('success', 'Post Successfull!');
 
         return redirect("admin/posts");
 
