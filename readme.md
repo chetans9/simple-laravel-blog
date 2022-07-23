@@ -5,7 +5,7 @@
 
 ## About Blog Writer
 
-Blog Writer is a  open source blogging application written in laravel 5.4.
+Blog Writer is a  open source blogging application written in laravel 9
 Application is easy to learn and use.
 
 ## Features
