@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
      * Bootstrap any application services.
      *
      * @return void
@@ -18,15 +28,5 @@ class AppServiceProvider extends ServiceProvider
             'layouts/admin/template', 'App\Http\ViewComposers\AdminHeaderComposer'
         );
 
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 }

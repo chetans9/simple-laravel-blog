@@ -4,17 +4,10 @@ namespace App\Http\Controllers\Contact;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\ContactRepository;
+use App\Models\ContactModel;
 
 class ContactUsController extends Controller
 {
-
-    protected $contactRepository;
-
-    public function __construct(ContactRepository $contactRepository)
-    {
-        $this->contactRepository = $contactRepository;
-    }
 
     public function index()
     {
@@ -30,14 +23,10 @@ class ContactUsController extends Controller
         ]);
         $inputs = $request->all();
         $return = array();
-        $contact = $this->contactRepository->create($inputs);
-        if($contact)
-        {
-            $return['status'] = 1;
-            $return['message'] = "Your request has been recorded";
-        }
-
-
+        $contact = ContactModel::create($inputs);
+        
+        $return['status'] = 1;
+        $return['message'] = "Your request has been recorded";
         return response()->json($return);
 
     }

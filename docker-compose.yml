@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: laravel_blog_nginx
+    ports:
+      - "8001:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      # - ./home/webwerks/secure_storage:/secure_storage
+    depends_on:
+      - php
+
+  # mysql:
+  #   image: mysql:5.7.30
+  #   container_name: laravel9_mysql
+  #   restart: unless-stopped
+  #   tty: true
+  #   ports:
+  #     - "4406:3306"
+  #   volumes:
+  #     - ./docker/mysql:/var/lib/mysql
+  #   environment:
+  #     MYSQL_DATABASE: homestead
+  #     MYSQL_USER: homestead
+  #     MYSQL_PASSWORD: secret
+  #     MYSQL_ROOT_PASSWORD: secret
+  #     SERVICE_TAGS: dev
+  #     SERVICE_NAME: mysql
+  #   networks:
+  #     - laravel9
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel9_php
+    volumes:
+      - ./:/var/www/html
+      # - ./docker/php/config:/usr/local/etc/php
+    ports:
+      - "9004:9000"
+  
+
+  laravel_blog_mysql:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: homestead
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    # ports:
+    #   - 3306:3306
+    volumes:
+      - laravel_blog_db_data:/var/lib/mysql
+  adminer_laravel_blog:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: laravel_blog_mysql
+    ports:
+      - 8080:8080
+volumes:
+  laravel_blog_db_data:
+
+
+      

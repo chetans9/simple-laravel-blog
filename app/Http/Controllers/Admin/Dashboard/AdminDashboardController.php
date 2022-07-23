@@ -4,33 +4,13 @@ namespace App\Http\Controllers\Admin\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\CommentsRepository;
-use App\Repositories\ContactRepository;
+use App\Models\CommentsModel;
+use App\Models\ContactModel;
 
 
 class AdminDashboardController extends Controller
 {
-    /**
-     * @var CommentsRepository
-     */
-    protected $commentsRepository;
 
-    /**
-     * @var ContactRepository
-     */
-    protected $contactRepository;
-
-    /**
-     * AdminDashboardController constructor.
-     * @param CommentsRepository $commentsRepository
-     * @param ContactRepository $contactRepository
-     */
-    public function __construct(CommentsRepository $commentsRepository, ContactRepository $contactRepository)
-    {
-        $this->commentsRepository = $commentsRepository;
-        $this->contactRepository = $contactRepository;
-
-    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -38,8 +18,9 @@ class AdminDashboardController extends Controller
     public function index()
     {
         $data = array();
-        $num_unread_comments = $this->commentsRepository->countUnreadComments();
-        $num_unread_contact = $this->contactRepository->countUnreadContact();
+
+        $num_unread_comments = CommentsModel::where('read','!=','1')->count();
+        $num_unread_contact = ContactModel::where('seen','!=','1')->count();
 
 
         $data['num_unread_contact'] = $num_unread_contact;

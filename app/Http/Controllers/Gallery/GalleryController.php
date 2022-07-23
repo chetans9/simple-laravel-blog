@@ -4,24 +4,10 @@ namespace App\Http\Controllers\Gallery;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\GalleryRepository;
+use App\Models\GalleryModel;
 
 class GalleryController extends Controller
 {
-    /**
-     * @var GalleryRepository
-     */
-    protected $galleryRepository;
-
-    /**
-     * GalleryController constructor.
-     *
-     * @param GalleryRepository $galleryRepository
-     */
-    public function __construct(GalleryRepository $galleryRepository)
-    {
-        $this->galleryRepository = $galleryRepository;
-    }
 
     /**
      * Show the Gallery page
@@ -30,8 +16,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //retrieve collection of "gallery" which are active
-        $galleries = $this->galleryRepository->getActive();
+        //retrieve collection of "gallery"
+        $galleries = GalleryModel::orderBy('created_at','asc')->get();
 
         $data['galleries'] = $galleries;
     	return view('gallery.index',$data);
