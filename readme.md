@@ -16,7 +16,7 @@ Blog Writer is a  open source blogging application written in laravel 9. Applica
 - User management.
 - WYSIWYG Editor
 
-##Requirements
+## Requirements
 - Requires a minimum PHP version of 8.0
 
 
