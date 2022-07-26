@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Classes\ImagePath;
+use App\Services\ImagePath;
 
 class PostsModel extends Model
 {
