@@ -13,7 +13,7 @@ https://cs9-simple-laravel-blog.herokuapp.com/
 https://cs9-simple-laravel-blog.herokuapp.com/admin
 
 ### Credentials for admin : 
-username : demo 
+email : demo@example.com
 password : demopassword
 
 
