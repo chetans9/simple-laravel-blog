@@ -2,6 +2,7 @@
 
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 
 /**
@@ -60,4 +61,13 @@ function uploadWithThumb($input_image,$upload_folder)
 	
 
 	return $return_image_path;
+}
+
+
+function str_limit($content, $limit){
+
+	return Str::limit($content, $limit);
+
+
+
 }
