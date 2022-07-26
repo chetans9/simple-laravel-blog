@@ -22,7 +22,7 @@ use App\Http\Controllers\Gallery\GalleryController;
 |
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// Auth::routes();
+Auth::routes();
 
 
 Route::get("/admin",[LoginController::class, 'showLoginForm'])->name('login');
