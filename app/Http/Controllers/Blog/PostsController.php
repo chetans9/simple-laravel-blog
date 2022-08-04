@@ -4,45 +4,22 @@ namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\PostCategoriesRepository;
-use App\Repositories\PostsRepository;
-use App\Repositories\UserRepository;
-use App\Repositories\CommentsRepository;
+use App\Models\PostCategoriesModel;
+use App\Models\PostsModel;
+use App\Models\User;
+use App\Models\CommentsModel;
 
 class PostsController extends Controller {
 
     /**
-     * @var UserRepository
+     * Show post 
+     * 
+     *  
      */
-	protected $usersRepository;
-    /**
-     * @var PostsRepository
-     */
-	protected $postsRepository;
-    /**
-     * @var CommentsRepository
-     */
-    protected $commentsRepository;
-
-    /**
-     * PostsController constructor.
-     *
-     * @param PostsRepository $postsRepository
-     * @param UserRepository $usersRepository
-     * @param CommentsRepository $commentsRepository
-     */
-	public function __construct(PostsRepository $postsRepository, UserRepository $usersRepository, CommentsRepository $commentsRepository) 
-    {
-		
-		$this->usersRepository = $usersRepository;
-		$this->postsRepository = $postsRepository;
-        $this->commentsRepository = $commentsRepository;
-
-	}
 	public function show($id) 
     {
         
-		$posts = $this->postsRepository->findActive($id);
+		$posts = PostsModel::active()->findOrFail($id);
         
 
         $data['post'] = $posts;
@@ -55,23 +32,15 @@ class PostsController extends Controller {
     public function storeComment(Request $request,$id)
     {
 
-
         $inputs = $request->all();
+        $post = PostsModel::active()->findOrFail($id);
 
-        //Save post id
-        $inputs['post_id'] = $id;
+        $comment  = new CommentsModel();
+        $comment->fill($inputs);
+        $comment->post_id = $post->id;
+        $comment->save();
 
-        $comment = $this->commentsRepository->create($inputs);
-        if($comment)
-        {
-            return back()->with("success","Success! Your Comment will be live after verification by admin");
-        }
-        else
-        {
-            return back()->with("failure","Something went wrong");
-
-        }
-
+        return back()->with("success","Success! Your Comment will be live after verification by admin");
 
     }
 }

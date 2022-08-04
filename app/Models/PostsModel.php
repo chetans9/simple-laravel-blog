@@ -58,4 +58,15 @@ class PostsModel extends Model
     {
         return $this->belongsToMany('App\Models\TagsModel','post_tag','post_id','tag_id');
     }
+
+    /**
+     * Scope a query to only include active posts.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return void
+     */
+    public function scopeActive($query)
+    {
+        $query->where('active', 1);
+    }
 }
