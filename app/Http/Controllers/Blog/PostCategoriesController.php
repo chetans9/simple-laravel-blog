@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\PostCategoriesModel;
+use App\Models\CategoriesModel;
 
 
 class PostCategoriesController extends Controller
@@ -18,7 +18,7 @@ class PostCategoriesController extends Controller
      */
     public function show($id)
     {
-        $category  = PostCategoriesModel::findOrFail($id);
+        $category  = CategoriesModel::findOrFail($id);
     	$posts = $category->posts()->where('posts.active','1')->paginate(10);
     	$data['category'] = $category;
     	$data['posts'] = $posts;

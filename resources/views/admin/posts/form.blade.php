@@ -11,12 +11,12 @@
         </span>
     @endif
 </div>
-<div class="form-group{{ $errors->has('categories') ? ' has-error' : '' }}">
-    {{Form::label('categories', 'Category *')}}
-    {{Form::select("categories[]",$categories,null, array("class"=>"form-control","id"=>"categories","multiple"=>"multiple"))}}
-    @if ($errors->has('categories'))
+<div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
+    {{Form::label('category_id', 'Category *')}}
+    {{Form::select("category_id",$categories,null, array("class"=>"form-control","id"=>"category_id"))}}
+    @if ($errors->has('category'))
         <span class="help-block">
-                <strong>{{ $errors->first('categories') }}</strong>
+                <strong>{{ $errors->first('category') }}</strong>
         </span>
     @endif
 </div>
@@ -111,7 +111,7 @@
 
         $(document).ready(function() {
 
-            $("#categories").select2();
+            $("#category_id").select2();
 
             $("#tags").select2({
                 minimumInputLength: 2,

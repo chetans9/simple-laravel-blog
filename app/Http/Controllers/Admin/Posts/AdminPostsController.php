@@ -8,7 +8,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 use App\Models\PostsModel;
 use App\Repositories\UserRepository;
-use App\Models\PostCategoriesModel;
+use App\Models\CategoriesModel;
 use App\Repositories\TagsRepository;
 use Auth;
 use Yajra\Datatables\Datatables;
@@ -64,7 +64,8 @@ class AdminPostsController extends Controller
     public function create()
     {
         $data = array();
-        $categories = PostCategoriesModel::pluck("name","id");
+        //Get key value pair data from categories table for populating in dropdown:
+        $categories = CategoriesModel::pluck("name","id");
         $data['post_tags'] = array();
         $data['categories'] = $categories;
         return view("admin.posts.create",$data);
@@ -83,7 +84,7 @@ class AdminPostsController extends Controller
             'title' => 'required',
             'content' => 'required',
             'active' => 'required',
-            'categories'=>'required|array|min:1',
+            'category_id'=>'required|numeric',
             'featured_image'=>'required'
         ]); 
         $inputs = $request->all();

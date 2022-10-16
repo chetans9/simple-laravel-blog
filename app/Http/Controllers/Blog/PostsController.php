@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\PostCategoriesModel;
+use App\Models\CategoriesModel;
 use App\Models\PostsModel;
 use App\Models\User;
 use App\Models\CommentsModel;

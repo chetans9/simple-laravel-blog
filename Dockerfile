@@ -14,10 +14,11 @@ RUN apk add busybox-extras
 RUN apk add nano
 RUN apk add curl
 RUN apk add libxml2 libxslt-dev
+RUN apk add jpeg-dev libpng-dev
 
 # COPY ./docker/php/config/php.ini /usr/local/etc/php
 
-#RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-configure gd --with-jpeg
 RUN docker-php-ext-install pdo pdo_mysql gd zip soap
 
 

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostCategoriesModel extends Model
+class CategoriesModel extends Model
 {
     protected $table = "categories";
 
@@ -17,7 +17,7 @@ class PostCategoriesModel extends Model
      */
     public function posts()
     {
-        return $this->belongsToMany('App\Models\PostsModel','post_category','category_id','post_id');
+        return $this->hasMany('App\Models\PostsModel','category_id');
     }
 
 }

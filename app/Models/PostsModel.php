@@ -26,9 +26,9 @@ class PostsModel extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany('App\Models\PostCategoriesModel','post_category','post_id','category_id');
+        return $this->belongsTo('App\Models\CategoriesModel','category_id');
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\PostCategoriesModel;
+use App\Models\CategoriesModel;
 
 class AdminPostsCategoriesController extends Controller
 {
@@ -23,7 +23,7 @@ class AdminPostsCategoriesController extends Controller
     public function index()
     {
 
-        $list = PostCategoriesModel::paginate(50);
+        $list = CategoriesModel::paginate(50);
 
 
         return view('admin.post_categories.list', compact('list'));
@@ -54,7 +54,7 @@ class AdminPostsCategoriesController extends Controller
         ]);
         $inputs = $request->all();
 
-        $status = PostCategoriesModel::create($inputs);
+        $status = CategoriesModel::create($inputs);
         $request->session()->flash('success', 'New Category created Successfully!');
         return redirect("admin/posts-categories");
 
@@ -70,7 +70,7 @@ class AdminPostsCategoriesController extends Controller
     public function edit($id)
     {
 
-        $post_category = PostCategoriesModel::findOrFail($id);
+        $post_category = CategoriesModel::findOrFail($id);
         $data['post_category'] = $post_category;
         return view('admin.post_categories.edit', $data);
 
@@ -89,7 +89,7 @@ class AdminPostsCategoriesController extends Controller
             'name' => 'required',
         ]);
         $inputs = $request->all();
-        $postCategory = PostCategoriesModel::findOrFail($id);
+        $postCategory = CategoriesModel::findOrFail($id);
         $postCategory->fill($inputs);
         $postCategory->save();
         $request->session()->flash('success', 'Category Updated Successfully!');
@@ -104,7 +104,7 @@ class AdminPostsCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $postCategory = PostCategoriesModel::findOrFail($id);
+        $postCategory = CategoriesModel::findOrFail($id);
         $postCategory->delete($id);
         $request->session()->flash('info','Category deleted Successfully');
         return redirect(route('posts-categories.index'));
